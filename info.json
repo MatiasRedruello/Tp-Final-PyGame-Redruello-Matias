@@ -1,0 +1,45 @@
+{
+    "settings":[
+        {
+            "pantalla":{
+                "screen_width":800,
+                "screen_height":600},
+            "colores":{
+                "white" : [255,255,255],
+                "black" : [0,0,0],
+                "red" : [255,0,0],
+                "green" : [0,255,0],
+                "blue" : [0,0,255]}
+        }
+    ],
+    "nivel_uno":[
+        {
+            "personaje":{
+                "bullet_image":"Power/player_laser.png",
+                "bullet_width":50,
+                "bullet_height":15},
+            "proyectil":{},
+            "enemigo":{},
+            "items":{},
+            "plataforma":{}
+        }
+    ],
+    "nivel_dos":[
+        {
+            "personaje":{},
+            "proyectil":{},
+            "enemigo":{},
+            "items":{},
+            "plataforma":{}
+        }
+    ],
+    "nivel_tres":[
+        {
+            "personaje":{},
+            "proyectil":{},
+            "enemigo":{},
+            "items":{},
+            "plataforma":{}
+        }
+    ]
+}
