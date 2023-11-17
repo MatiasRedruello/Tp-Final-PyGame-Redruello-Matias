@@ -9,14 +9,10 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Salto de un Rectángulo')
 
-back_img = pygame.image.load("background\goku_house.png")# Cargo imagen de fondo
+back_img = pygame.image.load("background/goku_house.png")# Cargo imagen de fondo
 back_img = pygame.transform.scale(back_img, (screen_width, screen_height))#Adapto imagen a la pantalla 
 
-white = (255,255,255)
-black = (0,0,0)
-red = (255,0,0)
-green = (0,255,0)
-blue = (0,0,255)
+
 
 # Color y dimensiones del rectángulo(podrian se rpropertys de una clase)
 rect_color = (0, 0, 255)  # Azul en formato RGB
