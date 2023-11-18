@@ -1,12 +1,15 @@
 {
     "settings":[
         {
-            "pantalla":{
+            "screen":
+            {
+                "screen_image":"background/goku_house.png",
                 "screen_width":800,
                 "screen_height":600,
                 "fps":60
             },
-            "colores":{
+            "colores":
+            {
                 "white" : [255,255,255],
                 "black" : [0,0,0],
                 "red" : [255,0,0],
@@ -17,19 +20,31 @@
     ],
     "nivel_uno":[
         {
-            "personaje":{
+            "personaje":
+            {
                 "rect_color" : [0,0,255],
                 "rect_width" : 50,
                 "rect_height" : 50
-                },
-            "proyectil":{
+            },
+            "proyectil":
+            {
                 "bullet_image":"Power/player_laser.png",
                 "bullet_width":50,
-                "bullet_height":15
+                "bullet_height":15,
+                "bullet_speed":5
             },
-            "enemigo":{},
-            "items":{},
-            "plataforma":{}
+            "enemigo":
+            {
+
+            },
+            "items":
+            {
+
+            },
+            "plataforma":
+            {
+
+            }
         }
     ],
     "nivel_dos":[
