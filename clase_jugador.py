@@ -3,8 +3,7 @@ from pygame.sprite import AbstractGroup
 
 screen_width = 800
 screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Salto de un Rectángulo')
+
 
 # Color y dimensiones del rectángulo(podrian se rpropertys de una clase)
 rect_color = (0, 0, 255)  # Azul en formato RGB
