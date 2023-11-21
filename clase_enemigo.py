@@ -21,7 +21,9 @@ class Enemy(pygame.sprite.Sprite):
                 pixel_limit_rigth,
                 pixel_limit_left,
                 pixel_limit_y,
-                lado) -> None:
+                lado,
+                screen_width,
+                screen_height) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
@@ -30,7 +32,9 @@ class Enemy(pygame.sprite.Sprite):
         self.rect_height = rect_height
         self.inicial_x = inicial_x #Donde Inicia en x
         self.inicial_y = inicial_y #Donde Inicia en y
-        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)       
+        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)   
+        self.screen_width = screen_width   
+        self.screen_height = screen_height
         self.lado = lado
         self.jump_height = 15
         self.gravity = 1
@@ -59,7 +63,7 @@ class Enemy(pygame.sprite.Sprite):
             if self.rect.left < 0 + self.pixel_limit_left: # el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
                 self.lado = "True"  # Cambia la dirección     
-
+    
     def do_movement(self):
         self.do_walk()
         self.gravity_settings()

@@ -1,6 +1,6 @@
 import pygame
 from pygame.sprite import AbstractGroup
-
+from clase_archivo import Archivo
 screen_width = 800
 screen_height = 600
 
@@ -12,22 +12,26 @@ rect_height = 50
 
 """x = 0
 y = screen_height - rect_height"""
-class Jugador(pygame.sprite.Sprite):
-    def __init__(self,x=0,y=0,rect_speed_x = 10,rect_speed_y = 0,lado= True) -> None:
+class Player(pygame.sprite.Sprite):
+    def __init__(self,screen_width,screen_height) -> None:
         super().__init__()
         # Caracteristicas
-        self.rect_speed_x = rect_speed_x # set
-        self.rect_speed_y = rect_speed_y # set
-        self.rect_width = 50 
-        self.rect_height = 50
-        self.inicial_x = 0 #Donde Inicia en x
-        self.inicial_y = 600 #Donde Inicia en y
-        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)       
-        self.lado = lado
+        self.archivo_json = Archivo.leer_json("info.json","r","level_one")
+        self.rect_color = self.archivo_json.get("player").get("rect_color")
+        self.rect_speed_x = self.archivo_json.get("player").get("rect_speed_x") # set
+        self.rect_speed_y = self.archivo_json.get("player").get("rect_speed_y") # set
+        self.rect_width = self.archivo_json.get("player").get("rect_width") 
+        self.rect_height = self.archivo_json.get("player").get("rect_height")
+        self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
+        self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
+        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)   
+        self.proyectil = self.archivo_json.get("player").get("proyectil")  
+        self.lado = True
         self.jump_height = 15
         self.gravity = 1
         self.jumping = False
-
+        self.screen_width = screen_width
+        self.screen_height = screen_height
     def jump_settings(self):
 
         self.rect_speed_y += self.gravity
