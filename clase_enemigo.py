@@ -4,14 +4,6 @@ from clase_archivo import Archivo
 from clase_proyectil import Proyectil
 from clase_auxiliar import Suport
 
-screen_width = 800
-screen_height = 600
-
-
-# Color y dimensiones del rectángulo(podrian se rpropertys de una clase)
-rect_color = (0, 255, 255)  # Azul en formato RGB
-rect_width = 50
-rect_height = 100
 
 """x = 0
 y = screen_height - rect_height"""
@@ -54,8 +46,8 @@ class Enemy(pygame.sprite.Sprite):
     def gravity_settings(self):
         self.rect.y +=self.gravity #aplico gravedad
         # Controlar el salto
-        if self.rect.y >= screen_height - self.pixel_limit_y: #pregunto donde esta el enemigo
-            self.rect.y = screen_height - self.pixel_limit_y  #ubico al enemigo en eje y
+        if self.rect.y >= self.screen_height - self.pixel_limit_y: #pregunto donde esta el enemigo
+            self.rect.y = self.screen_height - self.pixel_limit_y  #ubico al enemigo en eje y
         
     def do_walk(self):
         # Movimiento horizontal

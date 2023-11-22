@@ -33,7 +33,7 @@
             },
             "enemigo":
             {
-                "uno":
+                "1":
                 {
                     "rect_speed_x" : 5,
                     "rect_speed_y" : 0,
@@ -41,43 +41,43 @@
                     "rect_height" : 100,
                     "inicial_x" : 800, 
                     "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
+                    "pixel_limit_rigth" : 50,
+                    "pixel_limit_left" : 250,
                     "pixel_limit_y" : 100,
                     "lado" : "True"              
                 },
-                "dos":
+                "2":
                 {
                     "rect_speed_x" : 5,
                     "rect_speed_y" : 0,
                     "rect_width" : 20,
                     "rect_height" : 100,
                     "inicial_x" : 400, 
-                    "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
+                    "inicial_y" : 500,
+                    "pixel_limit_rigth" : 150,
+                    "pixel_limit_left" : 350,
                     "pixel_limit_y" : 300,
                     "lado" : "False"                    
                 },
-                "tres":
+                "3":
                 {
                     "rect_speed_x" : 1,
                     "rect_speed_y" : 0,
                     "rect_width" : 50,
-                    "rect_height" : 100,
+                    "rect_height" : 80,
                     "inicial_x" : 0, 
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 500,
-                    "pixel_limit_left" : 1,
+                    "pixel_limit_left" : 0,
                     "pixel_limit_y" : 600,
                     "lado" : "False"                    
                 },
-                "cuatro":
+                "4":
                 {
                     "rect_speed_x" : 5,
                     "rect_speed_y" : 0,
                     "rect_width" : 50,
-                    "rect_height" : 100,
+                    "rect_height" : 80,
                     "inicial_x" : 800, 
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 0, 
@@ -90,9 +90,112 @@
             {
 
             },
+            "portal":
+            {
+                "rect_width":50,
+                "rect_height":80,
+                "inicial_x" :150 , 
+                "inicial_y" :0 
+
+            },
             "plataforma":
             {
-
+                "1":
+                {
+                    "rect_speed_x" : 2,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 50,
+                    "rect_height" :50 ,
+                    "inicial_x" : 0, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 550,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True"              
+                },
+                "2":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 300,
+                    "rect_height" : 50,
+                    "inicial_x" : 350, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True"              
+                },
+                "3":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 50,
+                    "rect_height" : 50,
+                    "inicial_x" : 800, 
+                    "inicial_y" : 500,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True"              
+                },
+                "4":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 50,
+                    "rect_height" : 50,
+                    "inicial_x" : 70, 
+                    "inicial_y" : 300,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True"              
+                },
+                "5":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 250,
+                    "rect_height" : 50,
+                    "inicial_x" : 250, 
+                    "inicial_y" : 250,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 100,
+                    "lado" : "True"              
+                },
+                "6":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 300,
+                    "rect_height" : 50,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 80,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 100,
+                    "lado" : "True"              
+                },
+                "7":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 50,
+                    "rect_height" : 50,
+                    "inicial_x" : 300, 
+                    "inicial_y" : 130,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 100,
+                    "lado" : "True"              
+                },
+                "8":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "rect_width" : 300,
+                    "rect_height" : 50,
+                    "inicial_x" : 0, 
+                    "inicial_y" :80,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 100,
+                    "lado" : "True"              
+                }
             }
         }
     ],

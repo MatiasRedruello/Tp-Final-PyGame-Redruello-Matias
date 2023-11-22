@@ -2,17 +2,7 @@ import pygame
 from pygame.sprite import AbstractGroup
 from clase_archivo import Archivo
 from clase_proyectil import Proyectil
-screen_width = 800
-screen_height = 600
 
-
-# Color y dimensiones del rectángulo(podrian se rpropertys de una clase)
-rect_color = (0, 0, 255)  # Azul en formato RGB
-rect_width = 50
-rect_height = 50
-
-"""x = 0
-y = screen_height - rect_height"""
 class Player(pygame.sprite.Sprite):
     def __init__(self,screen_width,screen_height) -> None:
         super().__init__()
@@ -42,8 +32,8 @@ class Player(pygame.sprite.Sprite):
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
         # Controlar el salto
-        if self.rect.y > screen_height - self.rect.height:
-            self.rect.y = screen_height - self.rect.height
+        if self.rect.y > self.screen_height - self.rect.height:
+            self.rect.y = self.screen_height - self.rect.height
             self.jumping = False # reinicio el salto, si no slata una sola vez
             
     
@@ -51,7 +41,7 @@ class Player(pygame.sprite.Sprite):
         if letras_precionadas[pygame.K_RIGHT] and not letras_precionadas[pygame.K_LEFT]:
             self.rect.x += self.rect_speed_x
             #Limite de movimiento derecho
-            if self.rect.x > screen_width-self.rect_width:
+            if self.rect.x > self.screen_width-self.rect_width:
                 self.rect.x += -self.rect_speed_x
         elif letras_precionadas[pygame.K_LEFT] and not letras_precionadas[pygame.K_RIGHT]:
             self.rect.x += -self.rect_speed_x
