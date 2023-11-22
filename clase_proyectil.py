@@ -20,7 +20,7 @@ class Proyectil(pygame.sprite.Sprite):
         self.rect_height =  rect_height
         self.bullet_width = bullet_width
         self.bullet_height = bullet_height# Necesario para que el disparo salga del medio, class jugador
-        self.image = pygame.transform.scale(self.bullet_image, (self.bullet_width, self.bullet_height))#set
+        self.image = self.bullet_image # Necesito si o si self image ¿,si no romple en la clase sprite, acapuedoescalar si quiero
         self.rect = self.image.get_rect()
         self.rect.center = (self.player_x + (self.rect_width // 2), self.player_y + (self.rect_height // 2)) #tiene un porque,viene de la class jugador
         self.bullet_speed = bullet_speed #set

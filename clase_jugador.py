@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import AbstractGroup
 from clase_archivo import Archivo
+from clase_proyectil import Proyectil
 screen_width = 800
 screen_height = 600
 
@@ -32,15 +33,19 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
         self.screen_width = screen_width
         self.screen_height = screen_height
+        self.sprites = pygame.sprite.Group()
+        self.ultimo_disparo = 0
+        self.timepo_control = 500  
+              
     def jump_settings(self):
 
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
         # Controlar el salto
-        if self.rect.y >= screen_height - self.rect.height:
+        if self.rect.y > screen_height - self.rect.height:
             self.rect.y = screen_height - self.rect.height
-            self.jumping = False
-            self.rect_speed_y = 0  
+            self.jumping = False # reinicio el salto, si no slata una sola vez
+            
     
     def do_walk(self,letras_precionadas):
         if letras_precionadas[pygame.K_RIGHT] and not letras_precionadas[pygame.K_LEFT]:
@@ -58,15 +63,35 @@ class Player(pygame.sprite.Sprite):
         # Detecta la tecla de espacio para activar el salto
         for event in lista_de_eventos:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and not self.jumping:
-                self.jumping = True
+                self.jumping = True # me evita el salto multiple
                 self.rect_speed_y = - self.jump_height  # Configura la velocidad inicial del salto
         self.jump_settings()
 
-      
+    def do_shoot(self,lista_de_eventos,tiempo_actual):
+        for event in lista_de_eventos:   
+            if tiempo_actual-self.ultimo_disparo > self.timepo_control:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_d and not event.key == pygame.K_a :
+                    nuevo_proyectil = Proyectil(self.rect.x,self.rect.y,
+                                                self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
+                                                self.proyectil.get("bullet_width"),self.proyectil.get("bullet_height"),
+                                                self.proyectil.get("bullet_speed"),True)
+                    self.sprites.add(nuevo_proyectil)
+                    self.ultimo_disparo = tiempo_actual
 
-    def do_movement(self,letras_precionadas,lista_de_eventos):
+            if tiempo_actual-self.ultimo_disparo > self.timepo_control:        
+                # Detecta si se preciono la tecla de disparo a la izquierda  
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_a and not event.key == pygame.K_d:
+                    nuevo_proyectil = Proyectil(self.rect.x,self.rect.y,
+                                                self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
+                                                self.proyectil.get("bullet_width"),self.proyectil.get("bullet_height"),
+                                                self.proyectil.get("bullet_speed"),False)
+                    self.sprites.add(nuevo_proyectil)          
+                    self.ultimo_disparo = tiempo_actual
+
+    def do_movement(self,letras_precionadas,lista_de_eventos,tiempo_actual):
         self.do_walk(letras_precionadas)
         self.do_jump(lista_de_eventos)
+        self.do_shoot(lista_de_eventos,tiempo_actual)
         
     def update(self):
          pass

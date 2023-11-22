@@ -1,6 +1,5 @@
 import pygame
 import sys
-from clase_proyectil import Proyectil
 from clase_jugador import Player
 from clase_enemigo import Enemy
 from clase_archivo import Archivo
@@ -18,7 +17,7 @@ back_img = pygame.image.load(settings.get("screen").get("background_level_one"))
 back_img = pygame.transform.scale(back_img, (screen_width, screen_height))#Adapto imagen a la pantalla 
 
 # Lista para almacenar los proyectiles
-sprites = pygame.sprite.Group()
+
 
 #clock
 clock = pygame.time.Clock()
@@ -33,6 +32,7 @@ for enemy_dict in enemy_property:
                     enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("lado"),
                     screen_width,screen_height)
     enemy_list.append(enemy)
+sprites = pygame.sprite.Group()    
 # Crear jugador
 player = Player(screen_width,screen_height)
 # Bucle principal del juego
@@ -42,25 +42,13 @@ shooting = False
 running_game = True
 
 while running_game:
+    tiempo = pygame.time.get_ticks()
     letras_precionadas = pygame.key.get_pressed()
     lista_de_eventos = pygame.event.get()
+
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
             running_game = False
-        # Detecta si se preciono la tecla de disparo a la derecha
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_d and not event.key == pygame.K_a :
-            nuevo_proyectil = Proyectil(player.rect.x,player.rect.y,
-                                        player.rect.width,player.rect.height,player.proyectil.get("bullet_path"),
-                                        player.proyectil.get("bullet_width"),player.proyectil.get("bullet_height"),
-                                        player.proyectil.get("bullet_speed"),True)
-            sprites.add(nuevo_proyectil)
-        # Detecta si se preciono la tecla de disparo a la izquierda  
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_a and not event.key == pygame.K_d:
-            nuevo_proyectil = Proyectil(player.rect.x,player.rect.y,
-                                        player.rect.width,player.rect.height,player.proyectil.get("bullet_path"),
-                                        player.proyectil.get("bullet_width"),player.proyectil.get("bullet_height"),
-                                        player.proyectil.get("bullet_speed"),False)
-            sprites.add(nuevo_proyectil)        
 
     # Dibujar el fondo
     screen.blit(back_img, back_img.get_rect())  # Color blanco como fondo
@@ -72,16 +60,13 @@ while running_game:
         #Actualizar enemigos
     for new_enemy in enemy_list:
         pygame.draw.rect(screen, (0,255,0),(new_enemy.rect.x, new_enemy.rect.y, new_enemy.rect.width, new_enemy.rect.height))
-        nuevo_proyectil_enemigo = Proyectil(new_enemy.rect.x,new_enemy.rect.y,
-                                        new_enemy.rect.width,new_enemy.rect.height,"Power/gema_roja.png",
-                                        10,10,
-                                        5,False)
-        sprites.add(nuevo_proyectil_enemigo)
-        new_enemy.do_movement()
+        sprites.add(new_enemy.sprites)
+        new_enemy.do_movement(tiempo)
         new_enemy.update()
 
+    sprites.add(player.sprites)   
     #Actualizar Jugador
-    player.do_movement(letras_precionadas,lista_de_eventos)
+    player.do_movement(letras_precionadas,lista_de_eventos,tiempo)
     player.update()
 
     sprites.update()
