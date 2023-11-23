@@ -74,7 +74,6 @@ while running_game:
     screen.blit(back_img, back_img.get_rect())  # Color blanco como fondo
 
     # Dibujar el rectángulo en su nueva posición (el jugador)
-    pygame.draw.rect(screen, (255,0,0),(player.rect.x, player.rect.y, player.rect.width, player.rect.height))
      # Dibujar el rectángulo en su nueva posición (el portal)
     pygame.draw.rect(screen, (255,255,0),(portal.rect.x, portal.rect.y, portal.rect.width, portal.rect.height))
 
@@ -96,9 +95,10 @@ while running_game:
         new_enemy.update()
 
     sprites.add(player.sprites)   
+    sprites.add(player.sprite_player)
     #Actualizar Jugador
     player.do_movement(letras_precionadas,lista_de_eventos,tiempo)
-    player.update()
+  
     portal.update()
     sprites.update()
     sprites.draw(screen)
