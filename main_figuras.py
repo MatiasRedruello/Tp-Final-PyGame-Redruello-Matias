@@ -5,6 +5,7 @@ from clase_enemigo import Enemy
 from clase_archivo import Archivo
 from clase_plataforma import Plataforma
 from clase_portal import Portal
+from clase_items import Item
 pygame.init()
 
 # Configuración de la ventana
@@ -24,6 +25,14 @@ back_img = pygame.transform.scale(back_img, (screen_width, screen_height))#Adapt
 #clock
 clock = pygame.time.Clock()
 fps = 60
+
+#crear lista de items
+item_list = []
+item_porperty = Archivo.crear_lista_caracteristicas("info.json","r","level_one","items")
+for item_dict in item_porperty:
+    item = Item(item_dict.get("inicial_x"),item_dict.get("inicial_y"))
+    item_list.append(item)
+    
 #plataformas
 plataforma_list = []
 plataforma_porperty = Archivo.crear_lista_caracteristicas("info.json","r","level_one","plataforma")
@@ -69,11 +78,16 @@ while running_game:
      # Dibujar el rectángulo en su nueva posición (el portal)
     pygame.draw.rect(screen, (255,255,0),(portal.rect.x, portal.rect.y, portal.rect.width, portal.rect.height))
 
+    for new_item in item_list:
+        sprites.add(new_item.sprites)
+        new_item.update()
+
     for new_plataforma in plataforma_list:
         pygame.draw.rect(screen, (0,0,255),(new_plataforma.rect.x, new_plataforma.rect.y, new_plataforma.rect.width, new_plataforma.rect.height))
         #sprites.add(new_plataforma.sprites)# si lo saco no se ve el sprite del shoot del enemigo
         new_plataforma.do_movement()
-        new_plataforma.update()    
+        new_plataforma.update()  
+
         #Actualizar enemigos
     for new_enemy in enemy_list:
         pygame.draw.rect(screen, (0,255,0),(new_enemy.rect.x, new_enemy.rect.y, new_enemy.rect.width, new_enemy.rect.height))

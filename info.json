@@ -88,7 +88,21 @@
             },
             "items":
             {
-
+                "1":
+                {
+                    "inicial_x" :770 , 
+                    "inicial_y" :570              
+                },
+                "2":
+                {
+                    "inicial_x" :600 , 
+                    "inicial_y" :150             
+                },
+                "3":
+                {
+                    "inicial_x" :80, 
+                    "inicial_y" :250              
+                }
             },
             "portal":
             {

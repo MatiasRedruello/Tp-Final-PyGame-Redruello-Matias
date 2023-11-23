@@ -1,10 +1,6 @@
 import pygame
 
 
-#si json
-bullet_width = 50#si json
-bullet_height = 15#si json
-
 
 class Proyectil(pygame.sprite.Sprite):
     def __init__(self, x, y,rect_width,rect_height, bullet_path,
