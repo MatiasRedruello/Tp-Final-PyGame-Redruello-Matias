@@ -43,8 +43,7 @@
                     "inicial_y" : 600,
                     "pixel_limit_rigth" : 50,
                     "pixel_limit_left" : 250,
-                    "pixel_limit_y" : 100,
-                    "lado" : "True"              
+                    "pixel_limit_y" : 100              
                 },
                 "2":
                 {
@@ -56,8 +55,7 @@
                     "inicial_y" : 500,
                     "pixel_limit_rigth" : 150,
                     "pixel_limit_left" : 350,
-                    "pixel_limit_y" : 300,
-                    "lado" : "False"                    
+                    "pixel_limit_y" : 300               
                 },
                 "3":
                 {
@@ -69,8 +67,7 @@
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 500,
                     "pixel_limit_left" : 0,
-                    "pixel_limit_y" : 600,
-                    "lado" : "False"                    
+                    "pixel_limit_y" : 600               
                 },
                 "4":
                 {
@@ -82,8 +79,7 @@
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 0, 
                     "pixel_limit_left" : 600,
-                    "pixel_limit_y" : 600,
-                    "lado" : "False"                    
+                    "pixel_limit_y" : 600               
                 }
             },
             "items":

@@ -1,8 +1,8 @@
 import pygame
 from pygame.sprite import AbstractGroup
-from clase_archivo import Archivo
-from clase_proyectil import Proyectil
-from clase_auxiliar import Suport
+from clase_archivo import File
+from clase_proyectil import Bullet
+from clase_auxiliar import Lucky
 
 
 """x = 0

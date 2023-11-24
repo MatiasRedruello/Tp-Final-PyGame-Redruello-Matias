@@ -1,8 +1,6 @@
 import pygame
-from pygame.sprite import AbstractGroup
-from clase_archivo import Archivo
-from clase_proyectil import Proyectil
-from clase_auxiliar import Suport
+from clase_proyectil import Bullet
+from clase_auxiliar import Lucky
 
 
 """x = 0
@@ -16,7 +14,6 @@ class Enemy(pygame.sprite.Sprite):
                 pixel_limit_rigth,
                 pixel_limit_left,
                 pixel_limit_y,
-                lado,
                 screen_width,
                 screen_height) -> None:
         super().__init__()
@@ -25,22 +22,21 @@ class Enemy(pygame.sprite.Sprite):
         self.rect_speed_y = rect_speed_y # set
         self.rect_width = rect_width
         self.rect_height = rect_height
-        self.inicial_x = inicial_x #Donde Inicia en x
-        self.inicial_y = inicial_y #Donde Inicia en y
-        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)   
+        self.initial_x = inicial_x #Donde Inicia en x
+        self.initial_y = inicial_y #Donde Inicia en y
+        self.rect = pygame.Rect(self.initial_x, self.initial_y, self.rect_width, self.rect_height)   
         self.screen_width = screen_width   
         self.screen_height = screen_height
-        self.lado = lado
+        self.side = True
         self.disparo_flag_random = True
         self.jump_height = 15
         self.gravity = 1
-        self.jumping = False
         self.pixel_limit_rigth = pixel_limit_rigth #set
         self.pixel_limit_left = pixel_limit_left #set
-        self.pixel_limit_y = pixel_limit_y
-        self.sprites = pygame.sprite.Group()
-        self.ultimo_disparo = 0
-        self.timepo_control = Suport.propiedad_aleatoria()
+        self.pixel_limit_y = pixel_limit_y # Lo tengo por la gravedad, tendria que sacar la gravedad de enemigo  y sacar esto
+        self.bullets_group = pygame.sprite.Group()
+        self.last_shot = 0
+        self.time_control = Lucky.random_shooting_time()
 
 
     def gravity_settings(self):
@@ -51,42 +47,41 @@ class Enemy(pygame.sprite.Sprite):
         
     def do_walk(self):
         # Movimiento horizontal
-        if self.lado == "True":
+        if self.side == True:
             self.rect.x += self.rect_speed_x
             # Limitar el movimiento a la derecha
             if self.rect.right > 800 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.right = 800 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.lado = "False"  # Cambia la dirección
-        elif self.lado == "False":
+                self.side = False  # Cambia la dirección
+        elif self.side == False:
             self.rect.x -= self.rect_speed_x
             # Limitar el movimiento a la izquierda
             if self.rect.left < 0 + self.pixel_limit_left: # el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.lado = "True"  # Cambia la dirección    
+                self.side = True  # Cambia la dirección    
 
-    def do_shoot(self,tiempo_actual):
-        
-        if tiempo_actual-self.ultimo_disparo > self.timepo_control and self.disparo_flag_random:
-            nuevo_proyectil_enemigo = Proyectil(self.rect.x,self.rect.y,
+    def do_shoot(self,initial_time):
+        if initial_time-self.last_shot > self.time_control and self.disparo_flag_random:
+            new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,"Power/gema_roja.png",
                                             10,10,
                                             10,True)
-            self.sprites.add(nuevo_proyectil_enemigo)
-            self.ultimo_disparo = tiempo_actual
+            self.bullets_group.add(new_enemy_bullet)
+            self.last_shot = initial_time
             self.disparo_flag_random = False
-        elif tiempo_actual-self.ultimo_disparo > self.timepo_control and not self.disparo_flag_random:
-            nuevo_proyectil_enemigo = Proyectil(self.rect.x,self.rect.y,
+        elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random:
+            new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,"Power/gema_roja.png",
                                             10,10,
                                             10,False)
-            self.sprites.add(nuevo_proyectil_enemigo)
-            self.ultimo_disparo = tiempo_actual 
+            self.bullets_group.add(new_enemy_bullet)
+            self.last_shot = initial_time 
             self.disparo_flag_random = True       
     
-    def do_movement(self,tiempo):
+    def do_movement(self,time):
         self.do_walk()
         self.gravity_settings()
-        self.do_shoot(tiempo)
+        self.do_shoot(time)
         
     def update(self):
          pass

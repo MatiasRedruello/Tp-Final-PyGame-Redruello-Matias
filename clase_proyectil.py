@@ -2,7 +2,7 @@ import pygame
 
 
 
-class Proyectil(pygame.sprite.Sprite):
+class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y,rect_width,rect_height, bullet_path,
                     bullet_width ,
                     bullet_height ,
@@ -14,10 +14,9 @@ class Proyectil(pygame.sprite.Sprite):
         self.player_y = y # Posicion del jugador en x necesario para disparar desde el jugador, class jugador
         self.rect_width = rect_width # Necesario para que el disparo salga del medio, class jugador
         self.rect_height =  rect_height
-        self.bullet_width = bullet_width
-        self.bullet_height = bullet_height# Necesario para que el disparo salga del medio, class jugador
-        self.image = self.bullet_image # Necesito si o si self image ¿,si no romple en la clase sprite, acapuedoescalar si quiero
-        self.rect = self.image.get_rect()
+
+        self.image = self.bullet_image # Heredo de la clase sprite
+        self.rect = self.image.get_rect() #Heredo de la clase sprite
         self.rect.center = (self.player_x + (self.rect_width // 2), self.player_y + (self.rect_height // 2)) #tiene un porque,viene de la class jugador
         self.bullet_speed = bullet_speed #set
         self.lado = lado # viene de main

@@ -1,16 +1,16 @@
 import json
 
-class Archivo():
+class File():
     @staticmethod
-    def leer_json(ruta: str, modo: str, nivel: str) -> list[dict]:
+    def json_load(path: str, mode: str, level: str) -> list[dict]:
 
-        with open(ruta, modo, encoding='utf-8') as archivo_json:
-            level_setting = json.load(archivo_json).get(nivel)[0]
+        with open(path, mode, encoding='utf-8') as json_file:
+            level_setting = json.load(json_file).get(level)[0]
         return level_setting
     
-    def crear_lista_caracteristicas(ruta: str, modo: str, nivel: str,clase_deseada):
-        archivo_json = Archivo.leer_json(ruta, modo, nivel)
-        lista_vacia = []
-        for clave in archivo_json.get(f"{clase_deseada}").values():
-            lista_vacia.append(clave)    
-        return lista_vacia    
+    def create_property_list(path: str, mode: str, level: str,clase_deseada):
+        json_file = File.json_load(path, mode, level)
+        empty_list = []
+        for key in json_file.get(f"{clase_deseada}").values():
+            empty_list.append(key)    
+        return empty_list    

@@ -1,8 +1,8 @@
 import random
-class Suport():
+class Lucky():
     @staticmethod
-    def propiedad_aleatoria():
+    def random_shooting_time():
         # Generar un valor aleatorio (0 o 1)
-        valor = random.choice([1000,2000,3000])
+        value = random.choice([1000,2000,3000])
         # Si el valor es 1, devuelve True; de lo contrario, devuelve False
-        return valor    
+        return value    
