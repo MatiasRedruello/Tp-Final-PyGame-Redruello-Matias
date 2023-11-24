@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import AbstractGroup
 from clase_archivo import File
 from clase_proyectil import Bullet
-from clase_auxiliar import Lucky
+from clase_auxiliar import suport
 
 
 """x = 0

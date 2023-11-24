@@ -93,18 +93,17 @@ while running_game:
         sprites.add(new_enemy.bullets_group)# si lo saco no se ve el sprite del shoot del enemigo
         new_enemy.do_movement(tiempo)
         new_enemy.update()
-
+    delta_ms = clock.tick(fps)
     sprites.add(player,player.bullets_group,portal)   
 
     #Actualizar Jugador
-    player.do_movement(letras_precionadas,lista_de_eventos,tiempo)
+    player.do_movement(letras_precionadas,lista_de_eventos,tiempo,delta_ms)
   
-    portal.update()
     sprites.update()
     sprites.draw(screen)
 
     pygame.display.update()
-    clock.tick(fps)
+    
 # Salir de Pygame
 pygame.quit()
 sys.exit()

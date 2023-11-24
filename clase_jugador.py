@@ -1,8 +1,8 @@
 import pygame
-from pygame.sprite import AbstractGroup
+
 from clase_archivo import File
 from clase_proyectil import Bullet
-
+from clase_auxiliar import suport
 class Player(pygame.sprite.Sprite):
     def __init__(self,screen_width,screen_height) -> None:
         super().__init__()
@@ -16,15 +16,28 @@ class Player(pygame.sprite.Sprite):
         self.rect_height = self.archivo_json.get("player").get("rect_height")
         self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
         self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
-        self.player_path = "Player/Walk/npc_chicken__x1_walk_png_1354830385.png"
-        self.player_image = pygame.image.load(self.player_path)#actual la
-        self.player_image = pygame.transform.scale(self.player_image, (self.rect_width, self.rect_height))
-        self.player_image_looking_rigth = self.player_image 
-        self.player_image_looking_left = pygame.transform.flip(self.player_image,True,False)
-        self.bullets_group = pygame.sprite.Group()  
-        self.image = self.player_image  # Heredo de la clase sprite lo uso ara maj¿nejar los sprites
-        self.rect = self.player_image.get_rect() # Heredo de la clase sprite
+        self.iddle_r = suport.get_surface_from_spritesheet('Player/Idle/idle.png', 16, 1)
+        self.iddle_l = suport.get_surface_from_spritesheet('Player/Idle/idle.png', 16, 1, flip=True)
+        self.walk_r = suport.get_surface_from_spritesheet("Player/Walk/npc_chicken__x1_walk_png_1354830385.png", 6, 4)
+        self.walk_l = suport.get_surface_from_spritesheet("Player/Walk/npc_chicken__x1_walk_png_1354830385.png", 6, 4, flip=True)
+        self.frame_rate =60
+        self.player_animation_time = 0
+        self.player_move_time = 0
+
+        self.initial_frame = 0 # Cuadro incial en cero (el primero)
+        self.player_image_looking_rigth = True
+        self.player_image_looking_left = False
+        # Heredo de la clase sprite lo uso ara maj¿nejar los sprites
+        self.actual_animation = self.iddle_r # Es la lista de animacion con la que el personaje arranca
+        self.actual_img_animation = self.actual_animation[self.initial_frame]# Primera imagen
+        self.actual_img_animation = pygame.transform.scale(self.actual_img_animation,(25,50))
+        self.image = self.actual_img_animation
+        self.rect = self.actual_img_animation.get_rect()# Heredo de la clase sprite
         self.rect.topleft = (self.inicial_x, self.inicial_y)
+        
+        
+
+        self.bullets_group = pygame.sprite.Group() 
         self.proyectil = self.archivo_json.get("player").get("proyectil")  
         self.jump_height = 15
         self.gravity = 1
@@ -34,7 +47,7 @@ class Player(pygame.sprite.Sprite):
         self.ultimo_disparo = 0
         self.timepo_control = 500  
         
-
+        print(self.initial_frame)
     def jump_settings(self):
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
@@ -43,17 +56,28 @@ class Player(pygame.sprite.Sprite):
             self.rect.y = self.screen_height - self.rect.height
             self.jumping = False # reinicio el salto, si no slata una sola vez
             
-    
+    def stay(self):
+        """
+        self: Por defecto
+        Descripcion:
+        Permite que el personaje este quieto si no hay ninguna otra animacion distinta a iddle activa
+        """          
+        if self.actual_animation != self.iddle_l and self.actual_animation != self.iddle_r:#no es ninguna de las otras y es iddle l o r
+            self.actual_animation = self.iddle_r if self.is_looking_right else self.iddle_l
+            self.initial_frame = 0
+            self.rect_speed_x = 0
+            self.rect_speed_y = 0    
+
     def do_walk(self,letras_precionadas):
         if letras_precionadas[pygame.K_RIGHT] and not letras_precionadas[pygame.K_LEFT]:
             self.rect.x += self.rect_speed_x
-            self.image = self.player_image_looking_rigth #self.image es de laclase sprite
+            #self.image = self.player_image_looking_rigth #self.image es de laclase sprite
             #Limite de movimiento derecho
             if self.rect.x > self.screen_width-self.rect_width:
                 self.rect.x += -self.rect_speed_x
         elif letras_precionadas[pygame.K_LEFT] and not letras_precionadas[pygame.K_RIGHT]:
             self.rect.x += -self.rect_speed_x
-            self.image = self.player_image_looking_left
+            #self.image = self.player_image_looking_left
             # Limite de movimiento izquierdo
             if self.rect.x < 0:
                 self.rect.x += self.rect_speed_x
@@ -87,13 +111,35 @@ class Player(pygame.sprite.Sprite):
                     self.bullets_group.add(nuevo_proyectil)          
                     self.ultimo_disparo = tiempo_actual
 
-    def do_movement(self,letras_precionadas,lista_de_eventos,tiempo_actual):
+    def do_animation(self,delta_ms):
+        """
+        self: Por defecto
+        delta_ms: Permite controla la ejecucion de una aniacion 
+        Descripcion:
+        Controla el teimpo de animacion y ademas permite que se pase de una imagen a la siguiente
+        """        
+            # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
+        self.player_animation_time += delta_ms 
+        if self.player_animation_time >= self.frame_rate:
+            self.player_animation_time = 0
+            # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
+            if self.initial_frame < len(self.actual_animation) - 1: # mientras ese indice es menor al ultimo indice de la imagen sumo uno
+                self.initial_frame += 1
+            else:
+                self.initial_frame = 0
+                
+        self.actual_img_animation = self.actual_animation[self.initial_frame]
+        self.image = self.actual_img_animation
+
+    def do_movement(self,letras_precionadas,lista_de_eventos,tiempo_actual,delta_ms):
         self.do_walk(letras_precionadas)
         self.do_jump(lista_de_eventos)
         self.do_shoot(lista_de_eventos,tiempo_actual)
-        
+        self.do_animation(delta_ms)
     def update(self):
-         pass
+        pass
+
+    
           
 
 

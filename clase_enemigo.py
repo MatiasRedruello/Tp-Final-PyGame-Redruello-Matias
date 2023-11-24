@@ -1,6 +1,6 @@
 import pygame
 from clase_proyectil import Bullet
-from clase_auxiliar import Lucky
+from clase_auxiliar import suport
 
 
 """x = 0
@@ -36,7 +36,7 @@ class Enemy(pygame.sprite.Sprite):
         self.pixel_limit_y = pixel_limit_y # Lo tengo por la gravedad, tendria que sacar la gravedad de enemigo  y sacar esto
         self.bullets_group = pygame.sprite.Group()
         self.last_shot = 0
-        self.time_control = Lucky.random_shooting_time()
+        self.time_control = suport.random_shooting_time()
 
 
     def gravity_settings(self):
