@@ -10,7 +10,7 @@ class Portal(pygame.sprite.Sprite):
                 screen_height) -> None:
         super().__init__()
         # Caracteristicas
-        self.portal_path = r"Portal\furniture_door_door_door_up_x1_1_png_1354837638.png"
+        self.portal_path = r"Portal/furniture_door_door_door_up_x1_1_png_1354837638.png"
         self.portal_image = pygame.image.load(self.portal_path)
         self.portal_image = pygame.transform.scale(self.portal_image, (50, 80))
         self.inicial_x = 0 

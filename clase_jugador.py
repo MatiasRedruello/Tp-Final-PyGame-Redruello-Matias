@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.rect_height = self.archivo_json.get("player").get("rect_height")
         self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
         self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
-        self.player_path = "Player/player_ship.png"
+        self.player_path = "Player/Walk/npc_chicken__x1_walk_png_1354830385.png"
         self.player_image = pygame.image.load(self.player_path)#actual la
         self.player_image = pygame.transform.scale(self.player_image, (self.rect_width, self.rect_height))
         self.player_image_looking_rigth = self.player_image 
