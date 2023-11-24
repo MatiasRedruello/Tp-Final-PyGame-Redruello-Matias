@@ -75,7 +75,7 @@ while running_game:
 
     # Dibujar el rectángulo en su nueva posición (el jugador)
      # Dibujar el rectángulo en su nueva posición (el portal)
-    pygame.draw.rect(screen, (255,255,0),(portal.rect.x, portal.rect.y, portal.rect.width, portal.rect.height))
+    
 
     for new_item in item_list:
         sprites.add(new_item)
@@ -94,7 +94,7 @@ while running_game:
         new_enemy.do_movement(tiempo)
         new_enemy.update()
 
-    sprites.add(player,player.bullets_group)   
+    sprites.add(player,player.bullets_group,portal)   
 
     #Actualizar Jugador
     player.do_movement(letras_precionadas,lista_de_eventos,tiempo)

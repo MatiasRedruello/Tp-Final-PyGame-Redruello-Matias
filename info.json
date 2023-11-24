@@ -66,19 +66,19 @@
                     "inicial_x" : 0, 
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 500,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_left" : 50,
                     "pixel_limit_y" : 600               
                 },
                 "4":
                 {
-                    "rect_speed_x" : 5,
+                    "rect_speed_x" : 3,
                     "rect_speed_y" : 0,
                     "rect_width" : 50,
                     "rect_height" : 80,
                     "inicial_x" : 800, 
                     "inicial_y" : 0,
                     "pixel_limit_rigth" : 0, 
-                    "pixel_limit_left" : 600,
+                    "pixel_limit_left" : 500,
                     "pixel_limit_y" : 600               
                 }
             },
@@ -86,8 +86,8 @@
             {
                 "1":
                 {
-                    "inicial_x" :770 , 
-                    "inicial_y" :570              
+                    "inicial_x" :760 , 
+                    "inicial_y" :560              
                 },
                 "2":
                 {

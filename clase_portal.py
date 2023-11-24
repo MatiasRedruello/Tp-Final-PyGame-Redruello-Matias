@@ -10,15 +10,14 @@ class Portal(pygame.sprite.Sprite):
                 screen_height) -> None:
         super().__init__()
         # Caracteristicas
-        self.json_file = File.json_load("info.json","r","level_one")
-        self.rect_width = self.json_file.get("portal").get("rect_width")
-        self.rect_height = self.json_file.get("portal").get("rect_height")
-        self.inicial_x = self.json_file.get("portal").get("inicial_x") #Donde Inicia en x
-        self.inicial_y = self.json_file.get("portal").get("inicial_y") #Donde Inicia en y
-        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)   
-        self.screen_width = screen_width   
-        self.screen_height = screen_height
-        self.sprites = pygame.sprite.Group()#cuando tenga el sprite va a servir 
+        self.portal_path = r"Portal\furniture_door_door_door_up_x1_1_png_1354837638.png"
+        self.portal_image = pygame.image.load(self.portal_path)
+        self.portal_image = pygame.transform.scale(self.portal_image, (50, 80))
+        self.inicial_x = 0 
+        self.inicial_y = 0
+        self.image = self.portal_image # Heredo de sprite
+        self.rect = self.portal_image.get_rect()
+        self.rect.topleft = (self.inicial_x, self.inicial_y) 
 
 
     def update(self):
