@@ -1,10 +1,10 @@
 import random
 import pygame
-class suport():
+class Suport():
     @staticmethod
     def random_shooting_time():
         # Generar un valor aleatorio (0 o 1)
-        value = random.choice([500])
+        value = random.choice([500,])
         # Si el valor es 1, devuelve True; de lo contrario, devuelve False
         return value 
        

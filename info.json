@@ -4,7 +4,7 @@
             "screen":
             {
                 "screen_image":"background/goku_house.png",
-                "screen_width":800,
+                "screen_width":1000,
                 "screen_height":600,
                 "fps":60,
                 "name_level":"Level One",
@@ -26,6 +26,7 @@
                 "proyectil":
                 {
                     "bullet_path":"Player/Power/player_laser.png",
+                    "bullet_scale": [80,20],
                     "bullet_width":50,
                     "bullet_height":15,
                     "bullet_speed":5
@@ -38,14 +39,14 @@
                     "rect_speed_x" : 5,
                     "rect_speed_y" : 0,
                     "inicial_x" : 500, 
-                    "inicial_y" : 500,
+                    "inicial_y" : 470,
                     "pixel_limit_rigth" : 50,
                     "pixel_limit_left" : 250,
                     "pixel_limit_y" : 0,
-                    "bullet_path":"Enemy/Power/gema_roja.png",
-                    "walk_path":"Enemy/Walk/npc_fox_ranger__x1_idle1_png_1354839636.png",
-                    "row":9,
-                    "colum":1
+                    "bullet_path":"Enemy/Power/blue_bubble__x1_iconic_png_1354829722.png",
+                    "walk_path":"Enemy/Walk/npc_crab__x1_walk_png_1354831183.png",
+                    "row":6,
+                    "colum":4
                                 
                 }
             },
@@ -54,17 +55,20 @@
                 "1":
                 {
                     "inicial_x" :760 , 
-                    "inicial_y" :560              
+                    "inicial_y" :560,
+                    "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"           
                 },
                 "2":
                 {
                     "inicial_x" :600 , 
-                    "inicial_y" :150             
+                    "inicial_y" :150 ,
+                    "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"              
                 },
                 "3":
                 {
                     "inicial_x" :80, 
-                    "inicial_y" :250              
+                    "inicial_y" :250 ,
+                    "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
                 }
             },
             "portal":
@@ -81,97 +85,97 @@
                 {
                     "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
-                    "rect_width" : 50,
-                    "rect_height" :50 ,
                     "inicial_x" : 0, 
                     "inicial_y" : 400,
                     "pixel_limit_rigth" : 550,
                     "pixel_limit_left" : 0,
-                    "lado" : "True"              
+                    "lado" : "True",
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
+                    "plataform_scale": [50,50]        
                 },
                 "2":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 300,
-                    "rect_height" : 50,
                     "inicial_x" : 350, 
                     "inicial_y" : 400,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
-                    "lado" : "True"              
+                    "lado" : "True",
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
+                    "plataform_scale": [50,50]               
                 },
                 "3":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 50,
-                    "rect_height" : 50,
                     "inicial_x" : 800, 
                     "inicial_y" : 500,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
-                    "lado" : "True"              
+                    "lado" : "True" ,
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png"  ,
+                    "plataform_scale": [50,50]             
                 },
                 "4":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 50,
-                    "rect_height" : 50,
                     "inicial_x" : 70, 
                     "inicial_y" : 300,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
-                    "lado" : "True"              
+                    "lado" : "True" ,
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
+                    "plataform_scale": [50,50]              
                 },
                 "5":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 250,
-                    "rect_height" : 50,
                     "inicial_x" : 250, 
                     "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 100,
-                    "lado" : "True"              
+                    "lado" : "True"  ,
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
+                    "plataform_scale": [50,50]             
                 },
                 "6":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 300,
-                    "rect_height" : 50,
                     "inicial_x" : 500, 
                     "inicial_y" : 80,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 100,
-                    "lado" : "True"              
+                    "lado" : "True",
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
+                    "plataform_scale": [50,50]               
                 },
                 "7":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 50,
-                    "rect_height" : 50,
                     "inicial_x" : 300, 
                     "inicial_y" : 130,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 100,
-                    "lado" : "True"              
+                    "lado" : "True" ,
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
+                    "plataform_scale": [50,50]               
                 },
                 "8":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "rect_width" : 300,
-                    "rect_height" : 50,
                     "inicial_x" : 0, 
                     "inicial_y" :80,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 100,
-                    "lado" : "True"              
+                    "lado" : "True" ,
+                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
+                    "plataform_scale": [50,50]              
                 }
             }
         }

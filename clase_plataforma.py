@@ -2,33 +2,29 @@ import pygame
 from pygame.sprite import AbstractGroup
 from clase_archivo import File
 from clase_proyectil import Bullet
-from clase_auxiliar import suport
+from clase_auxiliar import Suport
 
 
 """x = 0
 y = screen_height - rect_height"""
 class Plataforma(pygame.sprite.Sprite):
     def __init__(self,rect_speed_x,rect_speed_y,
-                rect_width,
-                rect_height,
                 inicial_x  , 
                 inicial_y  ,
                 pixel_limit_rigth,
                 pixel_limit_left,
-                lado,
-                screen_width,
-                screen_height) -> None:
+                lado,plataform_path,plataform_scale) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
         self.rect_speed_y = rect_speed_y # set
-        self.rect_width = rect_width
-        self.rect_height = rect_height
+
         self.inicial_x = inicial_x #Donde Inicia en x
         self.inicial_y = inicial_y #Donde Inicia en y
-        self.rect = pygame.Rect(self.inicial_x, self.inicial_y, self.rect_width, self.rect_height)   
-        self.screen_width = screen_width   
-        self.screen_height = screen_height
+        self.item_image = pygame.image.load(plataform_path)        
+        self.image = pygame.transform.scale(self.item_image,plataform_scale) # Heredo de sprite
+        self.rect = self.item_image.get_rect()
+        self.rect.topleft = (self.inicial_x, self.inicial_y)    
         self.lado = lado
         self.pixel_limit_rigth = pixel_limit_rigth #set
         self.pixel_limit_left = pixel_limit_left #set

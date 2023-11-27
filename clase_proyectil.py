@@ -3,8 +3,8 @@ import pygame
 
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, x, y, rect_width, rect_height, bullet_path,
-                 bullet_width, bullet_height, bullet_speed, lado=True):
+    def __init__(self, x, y, rect_width, rect_height, bullet_path,bullet_scale,
+                bullet_speed, lado=True):
         super().__init__()
         self.bullet_path = bullet_path
         self.bullet_image = pygame.image.load(bullet_path)
@@ -12,7 +12,7 @@ class Bullet(pygame.sprite.Sprite):
         self.player_y = y
         self.rect_width = rect_width
         self.rect_height = rect_height
-        self.image = self.bullet_image
+        self.image = pygame.transform.scale(self.bullet_image,bullet_scale)
         self.rect = self.image.get_rect()
 
         # Definir posición basada en el lado del jugador

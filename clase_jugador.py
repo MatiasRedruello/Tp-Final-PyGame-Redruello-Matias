@@ -2,7 +2,7 @@ import pygame
 
 from clase_archivo import File
 from clase_proyectil import Bullet
-from clase_auxiliar import suport
+from clase_auxiliar import Suport
 class Player(pygame.sprite.Sprite):
     def __init__(self,screen_width,screen_height) -> None:
         super().__init__()
@@ -16,12 +16,12 @@ class Player(pygame.sprite.Sprite):
         self.rect_height = self.archivo_json.get("player").get("rect_height")
         self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
         self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
-        self.iddle_r = suport.get_surface_from_spritesheet("Player\Idle\player_idle.png", 5, 1)
-        self.iddle_l = suport.get_surface_from_spritesheet("Player\Idle\player_idle.png", 5, 1, flip=True)
-        self.walk_r = suport.get_surface_from_spritesheet("Player\Walk\player_walk.png", 6, 1)
-        self.walk_l = suport.get_surface_from_spritesheet("Player\Walk\player_walk.png", 6, 1, flip=True)
-        self.jump_r = suport.get_surface_from_spritesheet("Player\Jump\player_jump.png", 6, 1)
-        self.jump_l = suport.get_surface_from_spritesheet("Player\Jump\player_jump.png", 6, 1, flip=True)        
+        self.iddle_r = Suport.get_surface_from_spritesheet("Player/Idle/player_idle.png", 5, 1)
+        self.iddle_l = Suport.get_surface_from_spritesheet("Player/Idle/player_idle.png", 5, 1, flip=True)
+        self.walk_r = Suport.get_surface_from_spritesheet("Player/Walk/player_walk.png", 6, 1)
+        self.walk_l = Suport.get_surface_from_spritesheet("Player/Walk/player_walk.png", 6, 1, flip=True)
+        self.jump_r = Suport.get_surface_from_spritesheet("Player/Jump/player_jump.png", 6, 1)
+        self.jump_l = Suport.get_surface_from_spritesheet("Player/Jump/player_jump.png", 6, 1, flip=True)        
         self.frame_rate =120
         self.player_animation_time = 0
         self.player_move_time = 0
@@ -35,9 +35,6 @@ class Player(pygame.sprite.Sprite):
         self.image = self.actual_img_animation
         self.rect = self.image.get_rect() # Heredo de la clase sprite
         self.rect.topleft = (self.inicial_x, self.inicial_y)
-
-        
-
         self.bullets_group = pygame.sprite.Group() 
         self.proyectil = self.archivo_json.get("player").get("proyectil")  
         self.jump_height = 15
@@ -75,7 +72,7 @@ class Player(pygame.sprite.Sprite):
             if not self.jumping:
                 self.actual_animation = self.walk_r
                 self.player_image_looking_rigth = True
-            if self.rect.x > self.screen_width-self.rect_width:
+            if self.rect.x > self.screen_width-self.rect.width:
                 self.rect.x += -self.rect_speed_x
                 self.actual_animation = self.iddle_r
                 self.stay()            
@@ -116,7 +113,7 @@ class Player(pygame.sprite.Sprite):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_d and not event.key == pygame.K_a and  self.player_image_looking_rigth:
                     nuevo_proyectil = Bullet(self.rect.x,self.rect.y,
                                                 self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
-                                                self.proyectil.get("bullet_width"),self.proyectil.get("bullet_height"),
+                                                self.proyectil.get("bullet_scale"),
                                                 self.proyectil.get("bullet_speed"),True)
                     self.bullets_group.add(nuevo_proyectil)
                     self.ultimo_disparo = tiempo_actual
@@ -126,7 +123,7 @@ class Player(pygame.sprite.Sprite):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_a and not event.key == pygame.K_d and not self.player_image_looking_rigth:
                     nuevo_proyectil = Bullet(self.rect.x,self.rect.y,
                                                 self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
-                                                self.proyectil.get("bullet_width"),self.proyectil.get("bullet_height"),
+                                                self.proyectil.get("bullet_scale"),
                                                 self.proyectil.get("bullet_speed"),False)
                     self.bullets_group.add(nuevo_proyectil)          
                     self.ultimo_disparo = tiempo_actual

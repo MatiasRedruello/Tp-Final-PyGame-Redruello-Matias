@@ -30,17 +30,17 @@ fps = 60
 item_list = []
 item_porperty = File.create_property_list("info.json","r","level_one","items")
 for item_dict in item_porperty:
-    item = Item(item_dict.get("inicial_x"),item_dict.get("inicial_y"))
+    item = Item(item_dict.get("inicial_x"),item_dict.get("inicial_y"),item_dict.get("item_path"))
     item_list.append(item)
     
 #plataformas
 plataforma_list = []
 plataforma_porperty = File.create_property_list("info.json","r","level_one","plataforma")
 for plataforma_dict in plataforma_porperty:
-    plataforma = Plataforma(plataforma_dict.get("rect_speed_x"),plataforma_dict.get("rect_speed_y"),plataforma_dict.get("rect_width"),plataforma_dict.get("rect_height"),
+    plataforma = Plataforma(plataforma_dict.get("rect_speed_x"),plataforma_dict.get("rect_speed_y"),
                     plataforma_dict.get("inicial_x"),plataforma_dict.get("inicial_y"),plataforma_dict.get("pixel_limit_rigth"),
                     plataforma_dict.get("pixel_limit_left"),plataforma_dict.get("lado"),
-                    screen_width,screen_height)
+                    plataforma_dict.get("plataform_path"),plataforma_dict.get("plataform_scale"))
     plataforma_list.append(plataforma)
 # crea lista enemigos
 enemy_list = []
@@ -48,15 +48,14 @@ enemy_property = File.create_property_list("info.json","r","level_one","enemigo"
 for enemy_dict in enemy_property:
     enemy = Enemy(enemy_dict.get("rect_speed_x"),enemy_dict.get("rect_speed_y"),
                     enemy_dict.get("inicial_x"),enemy_dict.get("inicial_y"),enemy_dict.get("pixel_limit_rigth"),
-                    enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("bullet_path"),enemy_dict.get("walk_path"),
-                    enemy_dict.get("row"),enemy_dict.get("colum")
-                    )
-    
+                    enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("bullet_path"),
+                    enemy_dict.get("walk_path"),
+                    enemy_dict.get("row"),enemy_dict.get("colum"))
     enemy_list.append(enemy)
 sprites = pygame.sprite.Group()    
 # Crear jugador
 player = Player(screen_width,screen_height)
-portal = Portal(screen_width,screen_height)
+portal = Portal()
 # Bucle principal del juego
 
 
@@ -68,7 +67,6 @@ while running_game:
     letras_precionadas = pygame.key.get_pressed()
     lista_de_eventos = pygame.event.get()
     delta_ms = clock.tick(fps)
-
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
             running_game = False
@@ -76,7 +74,7 @@ while running_game:
     # Dibujar el fondo
     screen.blit(back_img, back_img.get_rect())  # Color blanco como fondo
 
-    # Dibujar el rectángulo en su nueva posición (el jugador)
+    # Dibujar el rectángulo en su nueva posición (el jugador)d 
      # Dibujar el rectángulo en su nueva posición (el portal)
     
 
@@ -85,17 +83,17 @@ while running_game:
         new_item.update()
 
     for new_plataforma in plataforma_list:
-        pygame.draw.rect(screen, (0,0,255),(new_plataforma.rect.x, new_plataforma.rect.y, new_plataforma.rect.width, new_plataforma.rect.height))
+        sprites.add(new_plataforma)
         #sprites.add(new_plataforma.sprites)# si lo saco no se ve el sprite del shoot del enemigo
         new_plataforma.do_movement()
         new_plataforma.update()  
 
         #Actualizar enemigos
     for new_enemy in enemy_list:
-        sprites.add(new_enemy.bullets_group,enemy)# si lo saco no se ve el sprite del shoot del enemigo
+        sprites.add(new_enemy.bullets_group,new_enemy)# si lo saco no se ve el sprite del shoot del enemigo
         new_enemy.do_movement(tiempo,delta_ms)
         new_enemy.update()
-    
+    portal.do_animation(delta_ms)
     sprites.add(player,player.bullets_group,portal)   
 
     #Actualizar Jugador

@@ -1,6 +1,6 @@
 import pygame
 from clase_proyectil import Bullet
-from clase_auxiliar import suport
+from clase_auxiliar import Suport
 
 
 """x = 0
@@ -25,25 +25,19 @@ class Enemy(pygame.sprite.Sprite):
         self.bullet_path = bullet_path
         self.walk_path = walk_path
 
-        self.walk_r = suport.get_surface_from_spritesheet(self.walk_path, row, colum)
-        self.walk_l = suport.get_surface_from_spritesheet(self.walk_path, row, colum, flip=True)
+        self.walk_r = Suport.get_surface_from_spritesheet(self.walk_path, row, colum, flip=True)
+        self.walk_l = Suport.get_surface_from_spritesheet(self.walk_path, row, colum)
      
         self.frame_rate =120
         self.player_animation_time = 0
         self.player_move_time = 0
 
         self.initial_frame = 0 # Cuadro incial en cero (el primero)
-
-
         self.actual_animation = self.walk_r # Es la lista de animacion con la que el personaje arranca
         self.actual_img_animation = self.actual_animation[self.initial_frame]# Primera imagen   
         self.image = self.actual_img_animation
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.initial_x, self.initial_y)
-
- 
-
-
 
         self.enemy_image_looking_rigth = True
         self.disparo_flag_random = True
@@ -54,7 +48,7 @@ class Enemy(pygame.sprite.Sprite):
         self.pixel_limit_y = pixel_limit_y # Lo tengo por la gravedad, tendria que sacar la gravedad de enemigo  y sacar esto
         self.bullets_group = pygame.sprite.Group()
         self.last_shot = 0
-        self.time_control = suport.random_shooting_time()
+        self.time_control = Suport.random_shooting_time()
 
 
      #ubico al enemigo en eje y
@@ -82,7 +76,7 @@ class Enemy(pygame.sprite.Sprite):
         if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth:
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
-                                            10,10,
+                                            (10,10),
                                             6,True)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time
@@ -90,7 +84,7 @@ class Enemy(pygame.sprite.Sprite):
         elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random and not self.enemy_image_looking_rigth:
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
-                                            10,10,
+                                            (10,10),
                                             6,False)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time 
