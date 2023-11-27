@@ -7,27 +7,45 @@ from clase_auxiliar import suport
 y = screen_height - rect_height"""
 class Enemy(pygame.sprite.Sprite):
     def __init__(self,rect_speed_x,rect_speed_y,
-                rect_width,
-                rect_height,
                 inicial_x  , 
                 inicial_y  ,
                 pixel_limit_rigth,
                 pixel_limit_left,
                 pixel_limit_y,
-                screen_width,
-                screen_height) -> None:
+                bullet_path,
+                walk_path,
+                row,
+                colum) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
         self.rect_speed_y = rect_speed_y # set
-        self.rect_width = rect_width
-        self.rect_height = rect_height
         self.initial_x = inicial_x #Donde Inicia en x
         self.initial_y = inicial_y #Donde Inicia en y
-        self.rect = pygame.Rect(self.initial_x, self.initial_y, self.rect_width, self.rect_height)   
-        self.screen_width = screen_width   
-        self.screen_height = screen_height
-        self.side = True
+        self.bullet_path = bullet_path
+        self.walk_path = walk_path
+
+        self.walk_r = suport.get_surface_from_spritesheet(self.walk_path, row, colum)
+        self.walk_l = suport.get_surface_from_spritesheet(self.walk_path, row, colum, flip=True)
+     
+        self.frame_rate =120
+        self.player_animation_time = 0
+        self.player_move_time = 0
+
+        self.initial_frame = 0 # Cuadro incial en cero (el primero)
+
+
+        self.actual_animation = self.walk_r # Es la lista de animacion con la que el personaje arranca
+        self.actual_img_animation = self.actual_animation[self.initial_frame]# Primera imagen   
+        self.image = self.actual_img_animation
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (self.initial_x, self.initial_y)
+
+ 
+
+
+
+        self.enemy_image_looking_rigth = True
         self.disparo_flag_random = True
         self.jump_height = 15
         self.gravity = 1
@@ -39,50 +57,68 @@ class Enemy(pygame.sprite.Sprite):
         self.time_control = suport.random_shooting_time()
 
 
-    def gravity_settings(self):
-        self.rect.y +=self.gravity #aplico gravedad
-        # Controlar el salto
-        if self.rect.y >= self.screen_height - self.pixel_limit_y: #pregunto donde esta el enemigo
-            self.rect.y = self.screen_height - self.pixel_limit_y  #ubico al enemigo en eje y
+     #ubico al enemigo en eje y
         
     def do_walk(self):
         # Movimiento horizontal
-        if self.side == True:
+        if  self.enemy_image_looking_rigth:
             self.rect.x += self.rect_speed_x
+            self.actual_animation = self.walk_r
             # Limitar el movimiento a la derecha
             if self.rect.right > 800 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.right = 800 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.side = False  # Cambia la dirección
-        elif self.side == False:
+                self.enemy_image_looking_rigth = False # Cambia la dirección
+                self.actual_animation = self.walk_l
+        elif not self.enemy_image_looking_rigth:
             self.rect.x -= self.rect_speed_x
+            self.actual_animation = self.walk_l 
             # Limitar el movimiento a la izquierda
             if self.rect.left < 0 + self.pixel_limit_left: # el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.side = True  # Cambia la dirección    
+                self.enemy_image_looking_rigth = True  # Cambia la dirección    
+                self.actual_animation = self.walk_r 
 
     def do_shoot(self,initial_time):
-        if initial_time-self.last_shot > self.time_control and self.disparo_flag_random:
+        if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth:
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
-                                            self.rect.width,self.rect.height,"Power/gema_roja.png",
+                                            self.rect.width,self.rect.height,self.bullet_path,
                                             10,10,
-                                            10,True)
+                                            6,True)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time
             self.disparo_flag_random = False
-        elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random:
+        elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random and not self.enemy_image_looking_rigth:
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
-                                            self.rect.width,self.rect.height,"Power/gema_roja.png",
+                                            self.rect.width,self.rect.height,self.bullet_path,
                                             10,10,
-                                            10,False)
+                                            6,False)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time 
             self.disparo_flag_random = True       
-    
-    def do_movement(self,time):
+    def do_animation(self,delta_ms):
+        """
+        self: Por defecto
+        delta_ms: Permite controla la ejecucion de una aniacion 
+        Descripcion:
+        Controla el teimpo de animacion y ademas permite que se pase de una imagen a la siguiente
+        """        
+            # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
+        self.player_animation_time += delta_ms 
+        if self.player_animation_time >= self.frame_rate:
+            self.player_animation_time = 0
+            # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
+            if self.initial_frame < len(self.actual_animation) - 1: # mientras ese indice es menor al ultimo indice de la imagen sumo uno
+                self.initial_frame += 1
+            else:
+                self.initial_frame = 0
+                
+            self.actual_img_animation = self.actual_animation[self.initial_frame]
+            self.image = self.actual_img_animation
+
+    def do_movement(self,time,delta_ms):
         self.do_walk()
-        self.gravity_settings()
         self.do_shoot(time)
-        
+        self.do_animation(delta_ms)
     def update(self):
          pass
           

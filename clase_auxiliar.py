@@ -4,9 +4,10 @@ class suport():
     @staticmethod
     def random_shooting_time():
         # Generar un valor aleatorio (0 o 1)
-        value = random.choice([1000,2000,3000])
+        value = random.choice([500])
         # Si el valor es 1, devuelve True; de lo contrario, devuelve False
-        return value    
+        return value 
+       
     @staticmethod # lo puedo usar sin instancial la clase
     def get_surface_from_spritesheet(img_path: str, cols: int, rows: int, step = 1, flip: bool = False) -> list[pygame.surface.Surface]:
         """

@@ -46,10 +46,12 @@ for plataforma_dict in plataforma_porperty:
 enemy_list = []
 enemy_property = File.create_property_list("info.json","r","level_one","enemigo")
 for enemy_dict in enemy_property:
-    enemy = Enemy(enemy_dict.get("rect_speed_x"),enemy_dict.get("rect_speed_y"),enemy_dict.get("rect_width"),enemy_dict.get("rect_height"),
+    enemy = Enemy(enemy_dict.get("rect_speed_x"),enemy_dict.get("rect_speed_y"),
                     enemy_dict.get("inicial_x"),enemy_dict.get("inicial_y"),enemy_dict.get("pixel_limit_rigth"),
-                    enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),
-                    screen_width,screen_height)
+                    enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("bullet_path"),enemy_dict.get("walk_path"),
+                    enemy_dict.get("row"),enemy_dict.get("colum")
+                    )
+    
     enemy_list.append(enemy)
 sprites = pygame.sprite.Group()    
 # Crear jugador
@@ -65,6 +67,7 @@ while running_game:
     tiempo = pygame.time.get_ticks()
     letras_precionadas = pygame.key.get_pressed()
     lista_de_eventos = pygame.event.get()
+    delta_ms = clock.tick(fps)
 
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
@@ -89,11 +92,10 @@ while running_game:
 
         #Actualizar enemigos
     for new_enemy in enemy_list:
-        pygame.draw.rect(screen, (0,255,0),(new_enemy.rect.x, new_enemy.rect.y, new_enemy.rect.width, new_enemy.rect.height))
-        sprites.add(new_enemy.bullets_group)# si lo saco no se ve el sprite del shoot del enemigo
-        new_enemy.do_movement(tiempo)
+        sprites.add(new_enemy.bullets_group,enemy)# si lo saco no se ve el sprite del shoot del enemigo
+        new_enemy.do_movement(tiempo,delta_ms)
         new_enemy.update()
-    delta_ms = clock.tick(fps)
+    
     sprites.add(player,player.bullets_group,portal)   
 
     #Actualizar Jugador

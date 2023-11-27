@@ -12,5 +12,5 @@ class File():
         json_file = File.json_load(path, mode, level)
         empty_list = []
         for key in json_file.get(f"{clase_deseada}").values():
-            empty_list.append(key)    
+            empty_list.append(key)   
         return empty_list    
