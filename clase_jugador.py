@@ -16,12 +16,12 @@ class Player(pygame.sprite.Sprite):
         self.rect_height = self.archivo_json.get("player").get("rect_height")
         self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
         self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
-        self.iddle_r = Suport.get_surface_from_spritesheet("Player/Idle/player_idle.png", 5, 1)
-        self.iddle_l = Suport.get_surface_from_spritesheet("Player/Idle/player_idle.png", 5, 1, flip=True)
-        self.walk_r = Suport.get_surface_from_spritesheet("Player/Walk/player_walk.png", 6, 1)
-        self.walk_l = Suport.get_surface_from_spritesheet("Player/Walk/player_walk.png", 6, 1, flip=True)
-        self.jump_r = Suport.get_surface_from_spritesheet("Player/Jump/player_jump.png", 6, 1)
-        self.jump_l = Suport.get_surface_from_spritesheet("Player/Jump/player_jump.png", 6, 1, flip=True)        
+        self.iddle_r = Suport.getSurfaceFromSpriteSheet("Player/Idle/player_idle.png", 5, 1, flip=False,step=5,scale=1)
+        self.iddle_l = Suport.getSurfaceFromSpriteSheet("Player/Idle/player_idle.png", 5, 1, flip=True,step=1,scale=1)
+        self.walk_r = Suport.getSurfaceFromSpriteSheet("Player/Walk/player_walk.png", 6, 1, flip=False,step=1,scale=1)
+        self.walk_l = Suport.getSurfaceFromSpriteSheet("Player/Walk/player_walk.png", 6, 1, flip=True,step=1,scale=1)
+        self.jump_r = Suport.getSurfaceFromSpriteSheet("Player/Jump/player_jump.png", 6, 1, flip=False,step=1,scale=1)
+        self.jump_l = Suport.getSurfaceFromSpriteSheet("Player/Jump/player_jump.png", 6, 1, flip=True,step=1,scale=1)        
         self.frame_rate =120
         self.player_animation_time = 0
         self.player_move_time = 0
@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = (self.inicial_x, self.inicial_y)
         self.bullets_group = pygame.sprite.Group() 
         self.proyectil = self.archivo_json.get("player").get("proyectil")  
-        self.jump_height = 15
+        self.jump_height = 16
         self.gravity = 1
         self.jumping = False
         self.screen_width = screen_width

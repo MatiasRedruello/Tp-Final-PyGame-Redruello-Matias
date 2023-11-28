@@ -35,8 +35,8 @@ class Plataforma(pygame.sprite.Sprite):
         if self.lado == "True":
             self.rect.x += self.rect_speed_x
             # Limitar el movimiento a la derecha
-            if self.rect.right > 800 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
-                self.rect.right = 800 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
+            if self.rect.right > 1000 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
+                self.rect.right = 1000 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
                 self.lado = "False"  # Cambia la dirección
         elif self.lado == "False":
             self.rect.x -= self.rect_speed_x

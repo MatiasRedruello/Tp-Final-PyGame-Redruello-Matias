@@ -5,7 +5,7 @@
             {
                 "screen_image":"background/goku_house.png",
                 "screen_width":1000,
-                "screen_height":600,
+                "screen_height":800,
                 "fps":60,
                 "name_level":"Level One",
                 "background_level_one":"background/goku_house.png"
@@ -22,11 +22,11 @@
                 "rect_speed_x" : 5, 
                 "rect_speed_y" : 0, 
                 "inicial_x" : 0, 
-                "inicial_y" : 600,                
+                "inicial_y" : 800,                
                 "proyectil":
                 {
                     "bullet_path":"Player/Power/player_laser.png",
-                    "bullet_scale": [80,20],
+                    "bullet_scale": [40,10],
                     "bullet_width":50,
                     "bullet_height":15,
                     "bullet_speed":5
@@ -36,17 +36,66 @@
             {
                 "1":
                 {
-                    "rect_speed_x" : 5,
+                    "rect_speed_x" : 3,
                     "rect_speed_y" : 0,
                     "inicial_x" : 500, 
-                    "inicial_y" : 470,
+                    "inicial_y" : 740,
                     "pixel_limit_rigth" : 50,
                     "pixel_limit_left" : 250,
                     "pixel_limit_y" : 0,
-                    "bullet_path":"Enemy/Power/blue_bubble__x1_iconic_png_1354829722.png",
-                    "walk_path":"Enemy/Walk/npc_crab__x1_walk_png_1354831183.png",
-                    "row":6,
-                    "colum":4
+                    "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
+                    "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
+                    "row":4,
+                    "colum":6,
+                    "separate_files":"no"
+                                
+                },
+                "2":
+                {
+                    "rect_speed_x" : 2,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 330,
+                    "pixel_limit_rigth" : 150,
+                    "pixel_limit_left" : 450,
+                    "pixel_limit_y" : 0,
+                    "bullet_path":"",
+                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
+                    "row":0,
+                    "colum":0,
+                    "separate_files":"yes"
+                                
+                },
+                "3":
+                {
+                    "rect_speed_x" : 2,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 50, 
+                    "inicial_y" : 330,
+                    "pixel_limit_rigth" : 550,
+                    "pixel_limit_left" : 50,
+                    "pixel_limit_y" : 0,
+                    "bullet_path":"",
+                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
+                    "row":0,
+                    "colum":0,
+                    "separate_files":"yes"
+                                
+                },
+                "4":
+                {
+                    "rect_speed_x" : 2,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 600, 
+                    "inicial_y" : 80,
+                    "pixel_limit_rigth" : 200,
+                    "pixel_limit_left" : 470,
+                    "pixel_limit_y" : 0,
+                    "bullet_path":"",
+                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
+                    "row":0,
+                    "colum":0,
+                    "separate_files":"yes"
                                 
                 }
             },
@@ -54,20 +103,20 @@
             {
                 "1":
                 {
-                    "inicial_x" :760 , 
-                    "inicial_y" :560,
+                    "inicial_x" :910 , 
+                    "inicial_y" :350,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"           
                 },
                 "2":
                 {
-                    "inicial_x" :600 , 
-                    "inicial_y" :150 ,
+                    "inicial_x" :810 , 
+                    "inicial_y" :100 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"              
                 },
                 "3":
                 {
-                    "inicial_x" :80, 
-                    "inicial_y" :250 ,
+                    "inicial_x" :10, 
+                    "inicial_y" :450 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
                 }
             },
@@ -81,102 +130,343 @@
             },
             "plataforma":
             {
-                "1":
+                "0":
                 {
-                    "rect_speed_x" : 2,
+                    "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 0, 
-                    "inicial_y" : 400,
-                    "pixel_limit_rigth" : 550,
+                    "inicial_x" : 950, 
+                    "inicial_y" : 700,
+                    "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
-                    "plataform_scale": [50,50]        
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]         
+                },
+                "1":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 800, 
+                    "inicial_y" : 600,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]         
                 },
                 "2":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 350, 
-                    "inicial_y" : 400,
+                    "inicial_x" : 750, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
+                    "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]               
                 },
                 "3":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 800, 
-                    "inicial_y" : 500,
+                    "inicial_x" : 700, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
-                    "lado" : "True" ,
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png"  ,
-                    "plataform_scale": [50,50]             
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]               
                 },
                 "4":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 70, 
-                    "inicial_y" : 300,
+                    "inicial_x" : 650, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
-                    "lado" : "True" ,
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
-                    "plataform_scale": [50,50]              
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]               
                 },
                 "5":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 250, 
-                    "inicial_y" : 250,
+                    "inicial_x" : 600, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
-                    "lado" : "True"  ,
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
-                    "plataform_scale": [50,50]             
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]               
                 },
                 "6":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 80,
+                    "inicial_x" : 550, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
+                    "pixel_limit_left" : 0,
                     "lado" : "True",
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
-                    "plataform_scale": [50,50]               
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
                 },
                 "7":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 300, 
-                    "inicial_y" : 130,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
-                    "lado" : "True" ,
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png",
-                    "plataform_scale": [50,50]               
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
                 },
                 "8":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 0, 
-                    "inicial_y" :80,
+                    "inicial_x" : 400, 
+                    "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 100,
-                    "lado" : "True" ,
-                    "plataform_path": "Plataform/brick__x1_iconic_png_1354833247.png" ,
-                    "plataform_scale": [50,50]              
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "9":
+                {
+                    "rect_speed_x" : 2,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 50, 
+                    "inicial_y" : 600,
+                    "pixel_limit_rigth" : 650,
+                    "pixel_limit_left" : 50,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "10":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 0, 
+                    "inicial_y" : 500,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "11":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 100, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "12":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 150, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "13":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 200, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "14":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 250, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [150,50]                
+                },
+                "15":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [150,50]                
+                },
+                "16":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 650, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "17":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 700, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "18":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 750, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "19":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 900, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "20":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 425, 
+                    "inicial_y" : 300,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "21":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
+                },
+                "22":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 550, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [150,50]                 
+                },
+                "23":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 700, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
+                },
+                "24":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 350, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
+                },
+                "25":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 200, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [150,50]                 
+                },
+                "26":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 150, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
+                },
+                "27":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 800, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                 
                 }
+
             }
         }
     ],

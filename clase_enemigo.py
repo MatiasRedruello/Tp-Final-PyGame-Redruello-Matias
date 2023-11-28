@@ -15,19 +15,23 @@ class Enemy(pygame.sprite.Sprite):
                 bullet_path,
                 walk_path,
                 row,
-                colum) -> None:
+                colum,
+                separate_files) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
         self.rect_speed_y = rect_speed_y # set
         self.initial_x = inicial_x #Donde Inicia en x
         self.initial_y = inicial_y #Donde Inicia en y
-        self.bullet_path = bullet_path
         self.walk_path = walk_path
-
-        self.walk_r = Suport.get_surface_from_spritesheet(self.walk_path, row, colum, flip=True)
-        self.walk_l = Suport.get_surface_from_spritesheet(self.walk_path, row, colum)
-     
+        self.separate_files = separate_files
+        if self.separate_files == "no":
+            self.bullet_path = bullet_path
+            self.walk_r = Suport.getSurfaceFromSpriteSheet(self.walk_path, colum, row, flip=True,step=1,scale=0.5)
+            self.walk_l = Suport.getSurfaceFromSpriteSheet(self.walk_path, colum, row, flip=False,step=1,scale=0.5)
+        elif self.separate_files =="yes":
+            self.walk_r = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=False,scale=0.1)
+            self.walk_l = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=True,scale=0.1)
         self.frame_rate =120
         self.player_animation_time = 0
         self.player_move_time = 0
@@ -59,8 +63,8 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.x += self.rect_speed_x
             self.actual_animation = self.walk_r
             # Limitar el movimiento a la derecha
-            if self.rect.right > 800 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
-                self.rect.right = 800 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
+            if self.rect.right > 1000 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
+                self.rect.right = 1000 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
                 self.enemy_image_looking_rigth = False # Cambia la dirección
                 self.actual_animation = self.walk_l
         elif not self.enemy_image_looking_rigth:
@@ -73,18 +77,18 @@ class Enemy(pygame.sprite.Sprite):
                 self.actual_animation = self.walk_r 
 
     def do_shoot(self,initial_time):
-        if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth:
+        if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth and self.separate_files == "no":
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
-                                            (10,10),
+                                            (30,30),
                                             6,True)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time
             self.disparo_flag_random = False
-        elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random and not self.enemy_image_looking_rigth:
+        elif initial_time-self.last_shot > self.time_control and not self.disparo_flag_random and not self.enemy_image_looking_rigth and self.separate_files == "no":
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
-                                            (10,10),
+                                            (30,30),
                                             6,False)
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time 

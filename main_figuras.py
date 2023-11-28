@@ -50,7 +50,7 @@ for enemy_dict in enemy_property:
                     enemy_dict.get("inicial_x"),enemy_dict.get("inicial_y"),enemy_dict.get("pixel_limit_rigth"),
                     enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("bullet_path"),
                     enemy_dict.get("walk_path"),
-                    enemy_dict.get("row"),enemy_dict.get("colum"))
+                    enemy_dict.get("row"),enemy_dict.get("colum"),enemy_dict.get("separate_files"))
     enemy_list.append(enemy)
 sprites = pygame.sprite.Group()    
 # Crear jugador
@@ -60,6 +60,8 @@ portal = Portal()
 
 
 shooting = False 
+
+
 running_game = True
 
 while running_game:

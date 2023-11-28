@@ -12,7 +12,7 @@ class Portal(pygame.sprite.Sprite):
         self.inicial_x = 0 
         self.inicial_y = 0
         self.portal_path = r"Portal/teleporter_visible__x1_portal_png_1354836401.png"
-        self.item_image = Suport.get_surface_from_spritesheet(self.portal_path,5,3)        
+        self.item_image = Suport.getSurfaceFromSpriteSheet(self.portal_path,5,3, flip=False,step=1,scale=0.5)        
 
         self.frame_rate =200
         self.player_animation_time = 0
