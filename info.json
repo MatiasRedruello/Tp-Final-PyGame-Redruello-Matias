@@ -29,7 +29,7 @@
                     "bullet_scale": [40,10],
                     "bullet_width":50,
                     "bullet_height":15,
-                    "bullet_speed":5
+                    "bullet_speed":20
                 }
             },
             "enemigo":

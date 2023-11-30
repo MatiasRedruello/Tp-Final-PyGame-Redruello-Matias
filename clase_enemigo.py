@@ -33,8 +33,8 @@ class Enemy(pygame.sprite.Sprite):
             self.walk_r = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=False,scale=0.1)
             self.walk_l = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=True,scale=0.1)
         self.frame_rate =120
-        self.player_animation_time = 0
-        self.player_move_time = 0
+        self.enemy_animation_time = 0
+        self.enemy_move_time = 0
 
         self.initial_frame = 0 # Cuadro incial en cero (el primero)
         self.actual_animation = self.walk_r # Es la lista de animacion con la que el personaje arranca
@@ -53,7 +53,7 @@ class Enemy(pygame.sprite.Sprite):
         self.bullets_group = pygame.sprite.Group()
         self.last_shot = 0
         self.time_control = Suport.random_shooting_time()
-
+    
 
      #ubico al enemigo en eje y
         
@@ -76,12 +76,14 @@ class Enemy(pygame.sprite.Sprite):
                 self.enemy_image_looking_rigth = True  # Cambia la dirección    
                 self.actual_animation = self.walk_r 
 
-    def do_shoot(self,initial_time):
+    def do_shoot(self,initial_time,delta_ms):
+        
         if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth and self.separate_files == "no":
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
                                             (30,30),
-                                            6,True)
+                                            6,60,delta_ms,True)
+            
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time
             self.disparo_flag_random = False
@@ -89,7 +91,8 @@ class Enemy(pygame.sprite.Sprite):
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
                                             (30,30),
-                                            6,False)
+                                            6,60,delta_ms,False)
+
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time 
             self.disparo_flag_random = True       
@@ -101,9 +104,9 @@ class Enemy(pygame.sprite.Sprite):
         Controla el teimpo de animacion y ademas permite que se pase de una imagen a la siguiente
         """        
             # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
-        self.player_animation_time += delta_ms 
-        if self.player_animation_time >= self.frame_rate:
-            self.player_animation_time = 0
+        self.enemy_animation_time += delta_ms 
+        if self.enemy_animation_time >= self.frame_rate:
+            self.enemy_animation_time = 0
             # en initial frame se guarda un numero del indice de la imagen que queremos mostrar
             if self.initial_frame < len(self.actual_animation) - 1: # mientras ese indice es menor al ultimo indice de la imagen sumo uno
                 self.initial_frame += 1
@@ -115,7 +118,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def do_movement(self,time,delta_ms):
         self.do_walk()
-        self.do_shoot(time)
+        self.do_shoot(time,delta_ms)
         self.do_animation(delta_ms)
     def update(self):
          pass
