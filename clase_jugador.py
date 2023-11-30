@@ -4,7 +4,7 @@ from clase_archivo import File
 from clase_proyectil import Bullet
 from clase_auxiliar import Suport
 class Player(pygame.sprite.Sprite):
-    def __init__(self,screen_width,screen_height) -> None:
+    def __init__(self,screen_width,screen_height,plataform_list) -> None:
         super().__init__()
         # Caracteristicas
         
@@ -36,17 +36,25 @@ class Player(pygame.sprite.Sprite):
         self.image = self.actual_img_animation
         self.rect = self.image.get_rect() # Heredo de la clase sprite
         self.rect.topleft = (self.inicial_x, self.inicial_y)
+        # pleyer collide rect 
+        self.feet_size_width = 25 
+        self.feet_size_height = 10 
+        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.left_rect = pygame.Rect(self.rect.left - self.feet_size_width, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
+        self.right_rect = pygame.Rect(self.rect.right, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
+        # 5 es la altura del rectángulo de colisión de los pies, puedes ajustarla según tu necesidad
 
         self.bullets_group = pygame.sprite.Group() 
         self.proyectil = self.archivo_json.get("player").get("proyectil")  
-        self.jump_height = 16
+        self.jump_height = 18
         self.gravity = 1
         self.jumping = False
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.ultimo_disparo = 0
         self.timepo_control = 500  
-        
+        self.plataform_list = plataform_list
 
     def jump_settings(self):
         self.rect_speed_y += self.gravity
@@ -156,16 +164,23 @@ class Player(pygame.sprite.Sprite):
         self.do_jump(lista_de_eventos)
         self.do_shoot(lista_de_eventos,tiempo_actual,delta_ms)
         self.do_animation(delta_ms)
-        
-    def update(self):
-        pass
 
-    def draw(self,secreen:pygame.surface.Surface):
+    def update(self):
+        # Actualizar la posición de los rectángulos
+        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - 0, self.feet_size_width, self.feet_size_height)
+        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.centery - self.feet_size_height // 2, self.feet_size_height, self.feet_size_width)
+        self.right_rect = pygame.Rect(self.rect.right - 10 , self.rect.centery - self.feet_size_height // 2, self.feet_size_height, self.feet_size_width)
+    def draw(self,screen:pygame.surface.Surface):
         if DEBUG:
-            pygame.draw.rect(secreen,(255, 0, 0),self.rect)
+            pygame.draw.rect(screen,(255, 0, 0),self.rect,2)
+            pygame.draw.rect(screen, (0,255,0), self.feet_rect,2)
+            pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
+            pygame.draw.rect(screen, (0,255,0), self.left_rect,2)
+            pygame.draw.rect(screen, (0,255,0), self.right_rect,2)
         self.image = self.actual_img_animation
-        secreen.blit(self.image,self.rect)
-    
+        screen.blit(self.image,self.rect)
+
           
 
 

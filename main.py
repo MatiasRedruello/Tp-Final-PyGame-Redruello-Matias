@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 #All Sprites and interactions
-sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.screen_height)
+sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.screen_height,screen)
 
 #Flags
 running_game = True
@@ -27,7 +27,7 @@ while running_game:
     delta_ms = clock.tick(fps)
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
-            running_game = False
+            running_game = False    
 
     # Draw background
     screen.blit(screen_setup.transform_back_img, screen_setup.transform_back_img.get_rect())  # Color blanco como fondo
@@ -36,8 +36,9 @@ while running_game:
     sprite_groups.time = tiempo
     sprite_groups.lista_de_eventos = lista_de_eventos
     sprite_groups.letras_precionadas = letras_precionadas
+    sprite_groups.draw()
     sprite_groups.update()
-    sprite_groups.draw(screen)
+
 
 
     pygame.display.update()

@@ -3,7 +3,7 @@ from pygame.sprite import AbstractGroup
 from clase_archivo import File
 from clase_proyectil import Bullet
 from clase_auxiliar import Suport
-
+from debug import DEBUG
 
 """x = 0
 y = screen_height - rect_height"""
@@ -21,10 +21,11 @@ class Plataforma(pygame.sprite.Sprite):
 
         self.inicial_x = inicial_x #Donde Inicia en x
         self.inicial_y = inicial_y #Donde Inicia en y
-        self.item_image = pygame.image.load(plataform_path)        
-        self.image = pygame.transform.scale(self.item_image,plataform_scale) # Heredo de sprite
-        self.rect = self.item_image.get_rect()
+        self.plataform_image = pygame.image.load(plataform_path)        
+        self.image = pygame.transform.scale(self.plataform_image,plataform_scale) # Heredo de sprite
+        self.rect = self.image.get_rect()# depende que le pase es lo que toma,plataform image toma el dibujo son el transform
         self.rect.topleft = (self.inicial_x, self.inicial_y)    
+        self.ground_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, (self.rect.height) // 4)
         self.lado = lado
         self.pixel_limit_rigth = pixel_limit_rigth #set
         self.pixel_limit_left = pixel_limit_left #set
@@ -48,12 +49,13 @@ class Plataforma(pygame.sprite.Sprite):
     def do_movement(self):
         self.do_walk()
 
-
-        
     def update(self):
-         pass
+         self.ground_rect.topleft = (self.rect.x, self.rect.y)
           
-
+    def draw(self,screen:pygame.surface.Surface):
+        if DEBUG:
+            pygame.draw.rect(screen, (0,255,0), self.ground_rect) # dibujo el cuadrado, rec: superficie,color y donde
+        screen.blit(self.image,self.rect)#superpongo el cuadrado a la imagen
 
 
 

@@ -8,7 +8,7 @@ from clase_items import Item
 
 
 class Sprite_interactions():
-    def __init__(self,screen_width,screen_height) -> None:
+    def __init__(self,screen_width,screen_height,screen) -> None:
 
         self.screen_width = screen_width
         self.screen_height = screen_height
@@ -32,9 +32,9 @@ class Sprite_interactions():
         self.player_group = pygame.sprite.Group()
         self.portal_group = pygame.sprite.Group()
 
-        self.player = Player(self.screen_width,self.screen_height)
+        self.player = Player(self.screen_width,self.screen_height,self.plataform_list)
         self.portal = Portal()
-        
+        self.screen = screen
         # Create class list
         for item_dict in self.item_porperty:
             item = Item(item_dict.get("inicial_x"),item_dict.get("inicial_y"),item_dict.get("item_path"))
@@ -64,6 +64,7 @@ class Sprite_interactions():
         for new_plataform in self.plataform_list:
             self.plataform_group.add(new_plataform)
             new_plataform.do_movement()
+            new_plataform.draw(self.screen)
             self.plataform_group.update() 
         #Enemy
         for new_enemy in self.enemy_list:
@@ -80,15 +81,24 @@ class Sprite_interactions():
         self.player_group.add(self.player,self.player.bullets_group)
               
 
-    def draw(self,screen):
-        self.item_group.draw(screen)
-        self.plataform_group.draw(screen)
-        self.enemy_group.draw(screen)
-        self.player.draw(screen)
-        self.player_group.draw(screen)
-        self.portal_group.draw(screen)
+    def draw(self):
+        self.item_group.draw(self.screen)
+        self.plataform_group.draw(self.screen)
+        self.enemy_group.draw(self.screen)
+        self.player.draw(self.screen)
+        self.player_group.draw(self.screen)
+        self.portal_group.draw(self.screen)
 
     def update(self):
         self.add_sprite_to_group()
-        
-        
+
+        for plataforma in self.plataform_list:
+            if self.player.feet_rect.colliderect(plataforma.ground_rect) :
+                self.player.rect.bottom = plataforma.ground_rect.top
+                self.player.rect_speed_y = 0
+                self.player.jumping = False
+            if self.player.head_rect.colliderect(plataforma.ground_rect):
+                self.player.rect_speed_y = 0
+                
+            
+                
