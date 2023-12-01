@@ -36,7 +36,8 @@ class Player(pygame.sprite.Sprite):
         self.image = self.actual_img_animation
         self.rect = self.image.get_rect() # Heredo de la clase sprite
         self.rect.topleft = (self.inicial_x, self.inicial_y)
-        # pleyer collide rect 
+        # pleyer collide 
+        self.collide = False
         self.feet_size_width = 25 
         self.feet_size_height = 10 
         self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
@@ -56,6 +57,7 @@ class Player(pygame.sprite.Sprite):
         self.timepo_control = 500  
         self.plataform_list = plataform_list
 
+        self.score = 0
     def jump_settings(self):
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
@@ -76,27 +78,31 @@ class Player(pygame.sprite.Sprite):
   
   
     def do_walk(self, letras_precionadas):
-        if letras_precionadas[pygame.K_RIGHT] and not letras_precionadas[pygame.K_LEFT]:
+        if letras_precionadas[pygame.K_RIGHT] and not letras_precionadas[pygame.K_LEFT] or self.collide:
             self.rect.x += self.rect_speed_x
             # Cambiar la velocidad horizontal solo si no está saltando
             if not self.jumping:
                 self.actual_animation = self.walk_r
                 self.player_image_looking_rigth = True
+                self.collide = False  
             if self.rect.x > self.screen_width-self.rect.width:
                 self.rect.x += -self.rect_speed_x
                 self.actual_animation = self.iddle_r
-                self.stay()            
+                self.stay()
+                          
             # Resto del código de límites de movimiento derecho...
-        elif letras_precionadas[pygame.K_LEFT] and not letras_precionadas[pygame.K_RIGHT]:
+        elif letras_precionadas[pygame.K_LEFT] and not letras_precionadas[pygame.K_RIGHT] or self.collide:
             self.rect.x += -self.rect_speed_x
             # Cambiar la velocidad horizontal solo si no está saltando
             if not self.jumping:
                 self.actual_animation = self.walk_l
                 self.player_image_looking_rigth = False
+                self.collide = False 
             if self.rect.x < 0:
                 self.rect.x += self.rect_speed_x
                 self.actual_animation = self.iddle_l
-                self.stay()            
+                self.stay()   
+                          
             # Resto del código de límites de movimiento izquierdo...
         elif not letras_precionadas[pygame.K_LEFT] or not letras_precionadas[pygame.K_RIGHT]:
             # Restablecer a la animación de quieto solo si no está saltando
@@ -176,7 +182,7 @@ class Player(pygame.sprite.Sprite):
             pygame.draw.rect(screen,(255, 0, 0),self.rect,2)
             pygame.draw.rect(screen, (0,255,0), self.feet_rect,2)
             pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
-            pygame.draw.rect(screen, (0,255,0), self.left_rect,2)
+            pygame.draw.rect(screen, (255,0,0), self.left_rect,2)
             pygame.draw.rect(screen, (0,255,0), self.right_rect,2)
         self.image = self.actual_img_animation
         screen.blit(self.image,self.rect)

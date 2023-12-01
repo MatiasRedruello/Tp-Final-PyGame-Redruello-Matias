@@ -5,8 +5,7 @@ from clase_proyectil import Bullet
 from clase_auxiliar import Suport
 from debug import DEBUG
 
-"""x = 0
-y = screen_height - rect_height"""
+
 class Plataforma(pygame.sprite.Sprite):
     def __init__(self,rect_speed_x,rect_speed_y,
                 inicial_x  , 
@@ -24,7 +23,12 @@ class Plataforma(pygame.sprite.Sprite):
         self.plataform_image = pygame.image.load(plataform_path)        
         self.image = pygame.transform.scale(self.plataform_image,plataform_scale) # Heredo de sprite
         self.rect = self.image.get_rect()# depende que le pase es lo que toma,plataform image toma el dibujo son el transform
-        self.rect.topleft = (self.inicial_x, self.inicial_y)    
+        self.rect.topleft = (self.inicial_x, self.inicial_y)
+        # Plataform collide 
+        self.feet_size_width = 40 
+        self.feet_size_height = 10 
+        self.left_rect = pygame.Rect(self.rect.left - self.feet_size_width, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
+        self.right_rect = pygame.Rect(self.rect.right, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)    
         self.ground_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, (self.rect.height) // 4)
         self.lado = lado
         self.pixel_limit_rigth = pixel_limit_rigth #set
@@ -50,11 +54,14 @@ class Plataforma(pygame.sprite.Sprite):
         self.do_walk()
 
     def update(self):
-         self.ground_rect.topleft = (self.rect.x, self.rect.y)
-          
+        self.ground_rect.topleft = (self.rect.x, self.rect.y)
+        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.centery - self.feet_size_height, self.feet_size_height, self.feet_size_width)
+        self.right_rect = pygame.Rect(self.rect.right - 10 , self.rect.centery - self.feet_size_height , self.feet_size_height, self.feet_size_width)  
     def draw(self,screen:pygame.surface.Surface):
         if DEBUG:
             pygame.draw.rect(screen, (0,255,0), self.ground_rect) # dibujo el cuadrado, rec: superficie,color y donde
+            pygame.draw.rect(screen, (255,0,0), self.left_rect,2)
+            pygame.draw.rect(screen, (0,255,0), self.right_rect,2)
         screen.blit(self.image,self.rect)#superpongo el cuadrado a la imagen
 
 

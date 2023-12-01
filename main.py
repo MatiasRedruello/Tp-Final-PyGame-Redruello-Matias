@@ -27,8 +27,11 @@ while running_game:
     delta_ms = clock.tick(fps)
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
-            running_game = False    
-
+            running_game = False  
+    # Falta ver como mostrarlo por pantalla   
+    if tiempo >= 60000: # si no gano en un minuto
+        print("Manco tardaste mucho....GAME OVER")
+        running_game = False 
     # Draw background
     screen.blit(screen_setup.transform_back_img, screen_setup.transform_back_img.get_rect())  # Color blanco como fondo
 

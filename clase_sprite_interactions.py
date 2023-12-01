@@ -99,6 +99,8 @@ class Sprite_interactions():
                 self.player.jumping = False
             if self.player.head_rect.colliderect(plataforma.ground_rect):
                 self.player.rect_speed_y = 0
-                
-            
-                
+            if self.player.left_rect.colliderect(plataforma.right_rect):
+                self.player.rect_speed_x = 0
+                self.player.collide = True
+            if self.player.right_rect.colliderect(plataforma.left_rect):
+                self.player.rect_speed_x = 0
