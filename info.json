@@ -465,6 +465,18 @@
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]                 
+                },
+                "28":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 750, 
+                    "inicial_y" : 550,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]               
                 }
 
             }

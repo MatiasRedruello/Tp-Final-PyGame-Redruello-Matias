@@ -28,7 +28,7 @@ while running_game:
     lista_de_eventos = pygame.event.get()
     delta_ms = clock.tick(fps)
     # le resto al minuto el tiempo, USO MAX Y EL MINO EN 0 PARA QUE NO ME DE NUEMERO NEGATIVO
-    tiempo_restante = max(0, 5000 - tiempo) // 1000 
+    tiempo_restante = max(0, 60000 - tiempo) // 1000 
     
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
@@ -59,7 +59,7 @@ while running_game:
 
     if you_lose_flag:
         screen.blit(you_lose_surface, you_lose_rect)
-        if tiempo//1000 == 8:
+        if tiempo//1000 == 63:
             running_game = False
         
 

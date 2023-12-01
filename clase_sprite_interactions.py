@@ -100,7 +100,8 @@ class Sprite_interactions():
             if self.player.head_rect.colliderect(plataforma.ground_rect):
                 self.player.rect_speed_y = 0
             if self.player.left_rect.colliderect(plataforma.right_rect):
-                self.player.rect_speed_x += 0
-                self.player.collide = True
+                """Si el lado izquierdo del jugador colisiona con el lado derecho de una plataforma, 
+                el jugador se coloca justo al lado derecho de esa plataforma."""
+                self.player.rect.left = plataforma.right_rect.right
             if self.player.right_rect.colliderect(plataforma.left_rect):
-                self.player.rect_speed_x += 0
+                self.player.rect.right = plataforma.left_rect.left
