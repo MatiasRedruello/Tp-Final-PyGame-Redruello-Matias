@@ -30,7 +30,9 @@
                     "bullet_width":50,
                     "bullet_height":15,
                     "bullet_speed":20
-                }
+                },
+                "lives_remaining":1,
+                "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
             },
             "enemigo":
             {
@@ -47,7 +49,9 @@
                     "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
                     "row":4,
                     "colum":6,
-                    "separate_files":"no"
+                    "separate_files":"no",
+                    "lives_remaining":2,
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
                                 
                 },
                 "2":
@@ -63,7 +67,13 @@
                     "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
                     "row":0,
                     "colum":0,
-                    "separate_files":"yes"
+                    "separate_files":"yes",
+                    "lives_remaining":3,
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    
+
                                 
                 },
                 "3":
@@ -79,7 +89,12 @@
                     "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
                     "row":0,
                     "colum":0,
-                    "separate_files":"yes"
+                    "separate_files":"yes",
+                    "lives_remaining":3,
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+
                                 
                 },
                 "4":
@@ -95,7 +110,12 @@
                     "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
                     "row":0,
                     "colum":0,
-                    "separate_files":"yes"
+                    "separate_files":"yes",
+                    "lives_remaining":3,
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+
                                 
                 }
             },
@@ -465,18 +485,6 @@
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]                 
-                },
-                "28":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 750, 
-                    "inicial_y" : 550,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]               
                 }
 
             }

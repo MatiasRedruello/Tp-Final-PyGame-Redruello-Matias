@@ -3,6 +3,7 @@ from debug import DEBUG
 from clase_archivo import File
 from clase_proyectil import Bullet
 from clase_auxiliar import Suport
+from clase_items import Item
 class Player(pygame.sprite.Sprite):
     def __init__(self,screen_width,screen_height,plataform_list) -> None:
         super().__init__()
@@ -16,6 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.rect_height = self.archivo_json.get("player").get("rect_height")
         self.inicial_x = self.archivo_json.get("player").get("inicial_x") #Donde Inicia en x
         self.inicial_y = self.archivo_json.get("player").get("inicial_y") #Donde Inicia en y
+        self.lives_remaining = self.archivo_json.get("player").get("lives_remaining")
+        self.lives_path = self.archivo_json.get("player").get("lives_path")
         self.iddle_r = Suport.getSurfaceFromSpriteSheet("Player/Idle/player_idle.png", 5, 1, flip=False,step=1,scale=1)
         self.iddle_l = Suport.getSurfaceFromSpriteSheet("Player/Idle/player_idle.png", 5, 1, flip=True,step=1,scale=1)
         self.walk_r = Suport.getSurfaceFromSpriteSheet("Player/Walk/player_walk.png", 6, 1, flip=False,step=1,scale=1)
@@ -40,12 +43,8 @@ class Player(pygame.sprite.Sprite):
         self.collide = False
         self.feet_size_width = 25 
         self.feet_size_height = 10 
-        self.side_height = 
-        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
-        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - self.feet_size_height, self.feet_size_width, self.feet_size_height)
-        self.left_rect = pygame.Rect(self.rect.left - self.feet_size_width, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
-        self.right_rect = pygame.Rect(self.rect.right, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
-        # 5 es la altura del rectángulo de colisión de los pies, puedes ajustarla según tu necesidad
+        self.side_height = 55
+        
 
         self.bullets_group = pygame.sprite.Group() 
         self.proyectil = self.archivo_json.get("player").get("proyectil")  
@@ -57,9 +56,10 @@ class Player(pygame.sprite.Sprite):
         self.ultimo_disparo = 0
         self.timepo_control = 500  
         self.plataform_list = plataform_list
-
         self.score = 0
-
+        self.define_collision_rects()
+        self.lives = self.create_life_point()
+        self.alive = True
     def jump_settings(self):
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
@@ -164,7 +164,22 @@ class Player(pygame.sprite.Sprite):
                 
             self.actual_img_animation = self.actual_animation[self.initial_frame]
             self.image = self.actual_img_animation
-        
+
+    def create_life_point(self):
+        lives = Item(self.rect.x,self.rect.y,self.lives_path,self.lives_remaining)
+        return lives
+
+    def move_item_with_player(self):
+        self.lives.rect.centerx = self.rect.centerx 
+        self.lives.rect.bottom = self.rect.top - 10     
+
+    def define_collision_rects(self):
+        # Define las áreas rectangulares
+        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.top, self.feet_size_height, self.rect.height)
+        self.right_rect = pygame.Rect(self.rect.right - self.feet_size_height, self.rect.top, self.feet_size_height, self.rect.height)  
+
     def do_movement(self,letras_precionadas,lista_de_eventos,tiempo_actual,delta_ms):
         self.do_walk(letras_precionadas)
         self.do_jump(lista_de_eventos)
@@ -172,21 +187,24 @@ class Player(pygame.sprite.Sprite):
         self.do_animation(delta_ms)
 
     def update(self):
-        # Actualizar la posición de los rectángulos
-        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
-        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - 0, self.feet_size_width, self.feet_size_height)
-        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.centery - self.feet_size_height // 2, self.feet_size_height, self.feet_size_width)
-        self.right_rect = pygame.Rect(self.rect.right - 10 , self.rect.centery - self.feet_size_height // 2, self.feet_size_height, self.feet_size_width)
-    def draw(self,screen:pygame.surface.Surface):
-        if DEBUG:
-            pygame.draw.rect(screen,(255, 0, 0),self.rect,2)
-            pygame.draw.rect(screen, (0,255,0), self.feet_rect,2)
-            pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
-            pygame.draw.rect(screen, (255,255,0), self.right_rect,2)
-            pygame.draw.rect(screen, (0,255,255), self.left_rect,2)
-        self.image = self.actual_img_animation
-        screen.blit(self.image,self.rect)
+        self.define_collision_rects()
+        self.move_item_with_player()
+        
+        #para actualizar la pósicion de la vida del jugador
+ 
 
+    def draw(self,screen:pygame.surface.Surface):
+        if self.alive:
+            if DEBUG:
+                pygame.draw.rect(screen,(255, 0, 0),self.rect,2)
+                pygame.draw.rect(screen, (0,255,0), self.feet_rect,2)
+                pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
+                pygame.draw.rect(screen, (255,255,0), self.right_rect,2)
+                pygame.draw.rect(screen, (0,255,255), self.left_rect,2)
+            self.image = self.actual_img_animation
+            self.lives.draw(screen)
+            screen.blit(self.image,self.rect)
+        
           
 
 

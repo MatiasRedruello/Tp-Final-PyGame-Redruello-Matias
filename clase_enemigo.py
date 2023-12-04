@@ -1,10 +1,8 @@
 import pygame
 from clase_proyectil import Bullet
 from clase_auxiliar import Suport
-
-
-"""x = 0
-y = screen_height - rect_height"""
+from clase_items import Item
+from debug import DEBUG
 class Enemy(pygame.sprite.Sprite):
     def __init__(self,rect_speed_x,rect_speed_y,
                 inicial_x  , 
@@ -16,22 +14,29 @@ class Enemy(pygame.sprite.Sprite):
                 walk_path,
                 row,
                 colum,
-                separate_files) -> None:
+                separate_files,
+                lives_remaining,
+                lives_path,attack_path,die_path) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
         self.rect_speed_y = rect_speed_y # set
         self.initial_x = inicial_x #Donde Inicia en x
         self.initial_y = inicial_y #Donde Inicia en y
-        self.walk_path = walk_path
         self.separate_files = separate_files
         if self.separate_files == "no":
             self.bullet_path = bullet_path
-            self.walk_r = Suport.getSurfaceFromSpriteSheet(self.walk_path, colum, row, flip=True,step=1,scale=0.5)
-            self.walk_l = Suport.getSurfaceFromSpriteSheet(self.walk_path, colum, row, flip=False,step=1,scale=0.5)
+            self.walk_r = Suport.getSurfaceFromSpriteSheet(walk_path, colum, row, flip=True,step=1,scale=0.5)
+            self.walk_l = Suport.getSurfaceFromSpriteSheet(walk_path, colum, row, flip=False,step=1,scale=0.5)
         elif self.separate_files =="yes":
-            self.walk_r = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=False,scale=0.1)
-            self.walk_l = Suport.getSurfaceFromSeparateFiles(self.walk_path,0,10,flip=True,scale=0.1)
+            self.walk_r = Suport.getSurfaceFromSeparateFiles(walk_path,0,10,flip=False,scale=0.1)
+            self.walk_l = Suport.getSurfaceFromSeparateFiles(walk_path,0,10,flip=True,scale=0.1)
+            self.mele_attack_r = Suport.getSurfaceFromSeparateFiles(attack_path,0,10,flip=False,scale=0.1)
+            self.mele_attack_l = Suport.getSurfaceFromSeparateFiles(attack_path,0,10,flip=True,scale=0.1)
+            self.die_r = Suport.getSurfaceFromSeparateFiles(die_path,0,10,flip=False,scale=0.1)
+            self.die_l = Suport.getSurfaceFromSeparateFiles(die_path,0,10,flip=True,scale=0.1)
+        self.lives_remaining = lives_remaining
+        self.lives_path = lives_path
         self.frame_rate =120
         self.enemy_animation_time = 0
         self.enemy_move_time = 0
@@ -43,6 +48,12 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.initial_x, self.initial_y)
 
+        #nemy colllide
+        self.feet_size_width = 25 
+        self.feet_size_height = 10 
+        self.side_height = 55
+        self.define_collision_rects()  
+              
         self.enemy_image_looking_rigth = True
         self.disparo_flag_random = True
         self.jump_height = 15
@@ -51,9 +62,12 @@ class Enemy(pygame.sprite.Sprite):
         self.pixel_limit_left = pixel_limit_left #set
         self.pixel_limit_y = pixel_limit_y # Lo tengo por la gravedad, tendria que sacar la gravedad de enemigo  y sacar esto
         self.bullets_group = pygame.sprite.Group()
+
+        self.lives = self.create_life_point()
         self.last_shot = 0
         self.time_control = Suport.random_shooting_time()
-    
+        self.alive = True #controla que el enemigo este vivo
+        self.mele_attack = False #controla ataque  mele
 
      #ubico al enemigo en eje y
         
@@ -62,6 +76,7 @@ class Enemy(pygame.sprite.Sprite):
         if  self.enemy_image_looking_rigth:
             self.rect.x += self.rect_speed_x
             self.actual_animation = self.walk_r
+            
             # Limitar el movimiento a la derecha
             if self.rect.right > 1000 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
                 self.rect.right = 1000 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
@@ -75,6 +90,13 @@ class Enemy(pygame.sprite.Sprite):
                 self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
                 self.enemy_image_looking_rigth = True  # Cambia la dirección    
                 self.actual_animation = self.walk_r 
+    def do_mele_attack(self):
+        if self.mele_attack and self.enemy_image_looking_rigth:
+            self.actual_animation = self.mele_attack_r
+        elif self.mele_attack and self.enemy_image_looking_rigth:
+            self.actual_animation = self.mele_attack_l
+
+
 
     def do_shoot(self,initial_time,delta_ms):
         
@@ -116,13 +138,61 @@ class Enemy(pygame.sprite.Sprite):
             self.actual_img_animation = self.actual_animation[self.initial_frame]
             self.image = self.actual_img_animation
 
+    def define_collision_rects(self):
+        # Define las áreas rectangulares
+        self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - self.feet_size_height, self.feet_size_width, self.feet_size_height)
+        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.top, self.feet_size_height, self.rect.height)
+        self.right_rect = pygame.Rect(self.rect.right - self.feet_size_height, self.rect.top, self.feet_size_height, self.rect.height)  
+    
+    
+        # Acciones adicionales antes de eliminar al enemigo, si las hay
+    def kill(self):
+        if self.lives_remaining == 0:
+            self.bullets_group.empty()
+            self.lives.kill()  # Elimina el sprite de las vidas del enemigo del grupo de sprites
+            super().kill()
+   
+            
+
     def do_movement(self,time,delta_ms):
+        self.do_mele_attack()
         self.do_walk()
         self.do_shoot(time,delta_ms)
         self.do_animation(delta_ms)
+        
+    def create_life_point(self):
+        lives = Item(self.rect.x,self.rect.y,self.lives_path,self.lives_remaining)
+        return lives
+        
+
+
+
+    def move_item_with_enemy(self):
+        self.lives.rect.centerx = self.rect.centerx 
+        self.lives.rect.bottom = self.rect.top - 10 
+    
     def update(self):
-         pass
-          
+        self.define_collision_rects()
+        self.move_item_with_enemy()
+        self.kill()
+        #para actualizar la vida del enemigo
+        self.lives.rect.centerx = self.rect.centerx
+        self.lives.rect.bottom = self.rect.top - 10
+        
+    def draw(self,screen:pygame.surface.Surface):
+        # Cuando esta vivo se dibuja
+        if self.alive:
+            if DEBUG:
+                pygame.draw.rect(screen,(255, 0, 0),self.rect,2)
+                pygame.draw.rect(screen, (0,255,0), self.feet_rect,2)
+                pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
+                pygame.draw.rect(screen, (255,255,0), self.right_rect,2)
+                pygame.draw.rect(screen, (0,255,255), self.left_rect,2)
+            self.lives.draw(screen)
+            screen.blit(self.image,self.rect)    
+            
+        
 
 
 

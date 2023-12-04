@@ -27,9 +27,7 @@ class Plataforma(pygame.sprite.Sprite):
         # Plataform collide 
         self.feet_size_width = 40 
         self.feet_size_height = 10 
-        self.left_rect = pygame.Rect(self.rect.left - self.feet_size_width, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)
-        self.right_rect = pygame.Rect(self.rect.right, self.rect.centery - self.feet_size_height // 2, self.feet_size_width, self.feet_size_height)    
-        self.ground_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, (self.rect.height) // 4)
+        self.define_collision_rects()        
         self.lado = lado
         self.pixel_limit_rigth = pixel_limit_rigth #set
         self.pixel_limit_left = pixel_limit_left #set
@@ -53,10 +51,15 @@ class Plataforma(pygame.sprite.Sprite):
     def do_movement(self):
         self.do_walk()
 
-    def update(self):
+    def define_collision_rects(self):
+        self.ground_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, (self.rect.height) // 4)
         self.ground_rect.topleft = (self.rect.x, self.rect.y)
         self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.centery - self.feet_size_height, self.feet_size_height, self.feet_size_width)
         self.right_rect = pygame.Rect(self.rect.right - 10 , self.rect.centery - self.feet_size_height , self.feet_size_height, self.feet_size_width)  
+
+    def update(self):
+        self.define_collision_rects()
+
     def draw(self,screen:pygame.surface.Surface):
         if DEBUG:
             pygame.draw.rect(screen, (0,255,0), self.ground_rect) # dibujo el cuadrado, rec: superficie,color y donde

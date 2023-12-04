@@ -17,6 +17,9 @@ fps = 60
 font = pygame.font.Font(None, 100)#tipo y tamaño de funete del tiempo
 you_lose_font = pygame.font.Font(None, 50)
 #All Sprites and interactions
+ 
+
+ 
 sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.screen_height,screen)
 #Flags
 running_game = True

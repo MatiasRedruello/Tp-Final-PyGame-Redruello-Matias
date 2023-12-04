@@ -38,6 +38,9 @@ class Bullet(pygame.sprite.Sprite):
                 self.rect.x -= self.bullet_speed
 
 
+    def draw(self,screen:pygame.surface.Surface):
+        pass
         
     def update(self):
         self.do_shoot()
+        
