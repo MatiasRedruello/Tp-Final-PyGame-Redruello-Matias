@@ -151,7 +151,7 @@ class Sprite_interactions():
             collision_item = pygame.sprite.spritecollide(player, self.item_group, True)
             if collision_item:
                 self.player.score += 1000
-        print(self.player.score)
+       
     def update(self):
         self.add_sprite_to_group()
         self.collide_player_with_plataform()
