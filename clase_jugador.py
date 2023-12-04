@@ -181,10 +181,11 @@ class Player(pygame.sprite.Sprite):
         self.right_rect = pygame.Rect(self.rect.right - self.feet_size_height, self.rect.top, self.feet_size_height, self.rect.height)  
 
     def do_movement(self,letras_precionadas,lista_de_eventos,tiempo_actual,delta_ms):
-        self.do_walk(letras_precionadas)
-        self.do_jump(lista_de_eventos)
-        self.do_shoot(lista_de_eventos,tiempo_actual,delta_ms)
-        self.do_animation(delta_ms)
+        if self.alive: 
+            self.do_walk(letras_precionadas)
+            self.do_jump(lista_de_eventos)
+            self.do_shoot(lista_de_eventos,tiempo_actual,delta_ms)
+            self.do_animation(delta_ms)
 
     def update(self):
         self.define_collision_rects()
@@ -201,7 +202,7 @@ class Player(pygame.sprite.Sprite):
                 pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
                 pygame.draw.rect(screen, (255,255,0), self.right_rect,2)
                 pygame.draw.rect(screen, (0,255,255), self.left_rect,2)
-            self.image = self.actual_img_animation
+            
             self.lives.draw(screen)
             screen.blit(self.image,self.rect)
         

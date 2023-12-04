@@ -31,7 +31,7 @@
                     "bullet_height":15,
                     "bullet_speed":20
                 },
-                "lives_remaining":1,
+                "lives_remaining":10,
                 "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
             },
             "enemigo":

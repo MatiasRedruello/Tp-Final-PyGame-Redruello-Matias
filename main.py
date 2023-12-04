@@ -25,7 +25,7 @@ sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.scree
 running_game = True
 you_lose_flag = False
 while running_game:
-
+    tiempo_control = 3
     tiempo = pygame.time.get_ticks()
     letras_precionadas = pygame.key.get_pressed()
     lista_de_eventos = pygame.event.get()
@@ -37,7 +37,7 @@ while running_game:
         if event.type == pygame.QUIT:
             running_game = False  
     # Falta ver como mostrarlo por pantalla   
-    if tiempo_restante == 0:
+    if tiempo_restante == 0 or sprite_groups.game_over:
         you_lose_flag = True
         # Renderizar mensaje 
         you_lose_surface = you_lose_font.render(f"GAME OVER", True, (255, 0, 0))  # Color blanco
@@ -62,8 +62,10 @@ while running_game:
 
     if you_lose_flag:
         screen.blit(you_lose_surface, you_lose_rect)
-        if tiempo//1000 == 63:
+
+        if tiempo//1000 == 63 or tiempo//1000 - sprite_groups.defuntion_time//1000 > 3:
             running_game = False
+            
         
 
 

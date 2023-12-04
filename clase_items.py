@@ -19,15 +19,17 @@ class Item(pygame.sprite.Sprite):
         if self.lives_remaining > 0:
             self.counter = self.lives_remaining # Contador para las vidas restantes
             self.font = pygame.font.Font(None, 15)  # Fuente para el contador
+        self.pick_up = False
 
 
 
 
     def draw(self, screen):
-        screen.blit(self.image, (self.rect.x -5, self.rect.y + 35)) # funde la imagen de las vidas
-        # Dibuja el contador sobre el corazón si tiene vidas restantes
-        text = self.font.render(str(self.counter), True, (255, 255, 255))
-        screen.blit(text, (self.rect.centerx, self.rect.centery+40))  # Posición del contador de vidas
+        if not self.pick_up:
+            screen.blit(self.image, (self.rect.x -5, self.rect.y + 35)) # funde la imagen de las vidas
+            # Dibuja el contador sobre el corazón si tiene vidas restantes
+            text = self.font.render(str(self.counter), True, (255, 255, 255))
+            screen.blit(text, (self.rect.centerx, self.rect.centery+40))  # Posición del contador de vidas
 
 
     def update(self):
