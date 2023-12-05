@@ -33,7 +33,6 @@ class Sprite_interactions():
         self.enemy_group = pygame.sprite.Group()
         self.enemy_bullets_group = pygame.sprite.Group()
         self.player_group = pygame.sprite.Group()
-        self.player_bullet_group = pygame.sprite.Group()
 
         self.portal_group = pygame.sprite.Group()
         self.player = Player(self.screen_width,self.screen_height,self.plataform_list)
@@ -79,7 +78,8 @@ class Sprite_interactions():
             new_enemy.do_movement(self.time,self.delta_ms)
             new_enemy.draw(self.screen)
             new_enemy.update()
-            self.enemy_bullets_group.update()
+            new_enemy.bullets_group.update()
+            new_enemy.bullets_group.draw(self.screen)
             self.enemy_group.update()  
         #Portal
         self.portal.do_animation(self.delta_ms)
@@ -87,7 +87,7 @@ class Sprite_interactions():
         self.portal_group.add(self.portal) 
         #PLayer
         self.player.do_movement(self.letras_precionadas,self.lista_de_eventos,self.time,self.delta_ms)
-        self.player_group.add(self.player.bullets_group)
+        self.player.bullets_group.update()
         self.player_group.add(self.player)
         self.player_group.update() 
         
@@ -97,9 +97,8 @@ class Sprite_interactions():
         self.item_group.draw(self.screen)
         self.plataform_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
-        self.enemy_bullets_group.draw(self.screen)
+        self.player.bullets_group.draw(self.screen)
         self.player.draw(self.screen)
-        self.player_bullet_group.draw(self.screen)
         self.player_group.draw(self.screen)
         self.portal_group.draw(self.screen)
 
@@ -144,20 +143,30 @@ class Sprite_interactions():
                         player_hit.alive = False
                         self.game_over = True
                         self.defuntion_time = self.time
+
     def collide_player_with_enemy(self):
-        pass
+        for enemy in self.enemy_list:
+            if self.player.left_rect.colliderect(enemy.right_rect) or self.player.right_rect.colliderect(enemy.left_rect) :
+                self.player.lives_remaining-=1
+                self.player.lives.counter -= 1
+                if self.player.lives_remaining == 0:
+                        self.player.alive = False
+                        self.game_over = True
+                        self.defuntion_time = self.time
+
     def collide_player_with_item(self):
-        for player in self.player_group:
-            collision_item = pygame.sprite.spritecollide(player, self.item_group, True)
-            if collision_item:
-                self.player.score += 1000
-        print(self.player.score)
+        collision_items = pygame.sprite.spritecollide(self.player, self.item_group, True) 
+        for item in collision_items:
+            if not item.collected:  # Verificar si el ítem no ha sido recogido antes
+                item.collected = True  # Marcar el ítem como recogido
+                self.player.score += 500
+                
+            
     def update(self):
         self.add_sprite_to_group()
         self.collide_player_with_plataform()
         self.collide_player_bullet_with_enemy()
         self.collide_enemy_bullet_with_player()
         self.collide_player_with_item()
-
-                
+        self.collide_player_with_enemy()
         

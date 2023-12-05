@@ -31,7 +31,7 @@
                     "bullet_height":15,
                     "bullet_speed":20
                 },
-                "lives_remaining":10,
+                "lives_remaining":9,
                 "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
             },
             "enemigo":
@@ -116,6 +116,23 @@
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
                     "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
 
+                                
+                },"5":
+                {
+                    "rect_speed_x" : 3,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 550,
+                    "pixel_limit_rigth" : 50,
+                    "pixel_limit_left" : 250,
+                    "pixel_limit_y" : 0,
+                    "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
+                    "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
+                    "row":4,
+                    "colum":6,
+                    "separate_files":"no",
+                    "lives_remaining":2,
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
                                 
                 }
             },

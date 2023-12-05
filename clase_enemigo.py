@@ -73,38 +73,37 @@ class Enemy(pygame.sprite.Sprite):
         
     def do_walk(self):
         # Movimiento horizontal
-        if  self.enemy_image_looking_rigth:
-            self.rect.x += self.rect_speed_x
-            self.actual_animation = self.walk_r
+             
+            if  self.enemy_image_looking_rigth:
+                self.rect.x += self.rect_speed_x
+                self.actual_animation = self.walk_r
+                
+                # Limitar el movimiento a la derecha
+                if self.rect.right > 1000 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
+                    self.rect.right = 1000 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
+                    self.enemy_image_looking_rigth = False # Cambia la dirección
+                    self.actual_animation = self.walk_l
+            elif not self.enemy_image_looking_rigth:
+                self.rect.x -= self.rect_speed_x
+                self.actual_animation = self.walk_l 
+                # Limitar el movimiento a la izquierda
+                if self.rect.left < 0 + self.pixel_limit_left: # el valor maximo de panalla - los pixeles donde es ellimite
+                    self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
+                    self.enemy_image_looking_rigth = True  # Cambia la dirección    
+                    self.actual_animation = self.walk_r 
+
+
+
             
-            # Limitar el movimiento a la derecha
-            if self.rect.right > 1000 - self.pixel_limit_rigth:# el valor maximo de panalla - los pixeles donde es ellimite
-                self.rect.right = 1000 - self.pixel_limit_rigth# lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.enemy_image_looking_rigth = False # Cambia la dirección
-                self.actual_animation = self.walk_l
-        elif not self.enemy_image_looking_rigth:
-            self.rect.x -= self.rect_speed_x
-            self.actual_animation = self.walk_l 
-            # Limitar el movimiento a la izquierda
-            if self.rect.left < 0 + self.pixel_limit_left: # el valor maximo de panalla - los pixeles donde es ellimite
-                self.rect.left = 0 + self.pixel_limit_left # lo tenes que ubicar en el mismo lugar que el cuadrado apra que no desaparece
-                self.enemy_image_looking_rigth = True  # Cambia la dirección    
-                self.actual_animation = self.walk_r 
-    def do_mele_attack(self):
-        if self.mele_attack and self.enemy_image_looking_rigth:
-            self.actual_animation = self.mele_attack_r
-        elif self.mele_attack and self.enemy_image_looking_rigth:
-            self.actual_animation = self.mele_attack_l
 
-
-
+   
     def do_shoot(self,initial_time,delta_ms):
         
         if initial_time-self.last_shot > self.time_control and self.disparo_flag_random and self.enemy_image_looking_rigth and self.separate_files == "no":
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
                                             (30,30),
-                                            6,60,delta_ms,True)
+                                            10,30,delta_ms,True)
             
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time
@@ -113,7 +112,7 @@ class Enemy(pygame.sprite.Sprite):
             new_enemy_bullet = Bullet(self.rect.x,self.rect.y,
                                             self.rect.width,self.rect.height,self.bullet_path,
                                             (30,30),
-                                            6,60,delta_ms,False)
+                                            10,30,delta_ms,False)
 
             self.bullets_group.add(new_enemy_bullet)
             self.last_shot = initial_time 
@@ -156,7 +155,7 @@ class Enemy(pygame.sprite.Sprite):
             
 
     def do_movement(self,time,delta_ms):
-        self.do_mele_attack()
+  
         self.do_walk()
         self.do_shoot(time,delta_ms)
         self.do_animation(delta_ms)
@@ -164,21 +163,18 @@ class Enemy(pygame.sprite.Sprite):
     def create_life_point(self):
         lives = Item(self.rect.x,self.rect.y,self.lives_path,self.lives_remaining)
         return lives
-        
-
-
 
     def move_item_with_enemy(self):
         self.lives.rect.centerx = self.rect.centerx 
         self.lives.rect.bottom = self.rect.top - 10 
     
     def update(self):
+        
         self.define_collision_rects()
         self.move_item_with_enemy()
         self.kill()
         #para actualizar la vida del enemigo
-        self.lives.rect.centerx = self.rect.centerx
-        self.lives.rect.bottom = self.rect.top - 10
+
         
     def draw(self,screen:pygame.surface.Surface):
         # Cuando esta vivo se dibuja

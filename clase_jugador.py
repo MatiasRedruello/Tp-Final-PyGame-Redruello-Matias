@@ -60,6 +60,9 @@ class Player(pygame.sprite.Sprite):
         self.define_collision_rects()
         self.lives = self.create_life_point()
         self.alive = True
+
+
+        
     def jump_settings(self):
         self.rect_speed_y += self.gravity
         self.rect.y += self.rect_speed_y
@@ -190,7 +193,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.define_collision_rects()
         self.move_item_with_player()
-        
+        print(self.score)
         #para actualizar la pósicion de la vida del jugador
  
 

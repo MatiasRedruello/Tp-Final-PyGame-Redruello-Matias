@@ -1,5 +1,5 @@
 import pygame
-
+from debug import DEBUG
 
 
 class Item(pygame.sprite.Sprite):
@@ -12,20 +12,26 @@ class Item(pygame.sprite.Sprite):
         self.item_image = pygame.image.load(item_path)        
         self.image = self.item_image # Heredo de sprite
         self.rect = self.item_image.get_rect()
-        self.rect.topleft = (self.inicial_x, self.inicial_y)      
+        
+        self.rect.topleft = (self.inicial_x, self.inicial_y)
+            
         #cuando tenga el sprite va a servir 
         self.lives_remaining = lives_remaining 
         self.collide = False # Cantidad de vidas asociadas al corazón
+
         if self.lives_remaining > 0:
             self.counter = self.lives_remaining # Contador para las vidas restantes
             self.font = pygame.font.Font(None, 15)  # Fuente para el contador
-        self.pick_up = False
+        self.collected = False  # Bandera para saber si el ítem ha sido recogido
+
+    
+ 
 
 
-
+    
 
     def draw(self, screen):
-        if not self.pick_up:
+        
             screen.blit(self.image, (self.rect.x -5, self.rect.y + 35)) # funde la imagen de las vidas
             # Dibuja el contador sobre el corazón si tiene vidas restantes
             text = self.font.render(str(self.counter), True, (255, 255, 255))
@@ -33,8 +39,9 @@ class Item(pygame.sprite.Sprite):
 
 
     def update(self):
-        # Lógica de actualización si es necesario
-        pass
+        # Lógica de actualización si es necesario para el item
+       if self.collected:
+            self.kill()        
 
 
 

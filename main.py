@@ -61,9 +61,10 @@ while running_game:
     screen.blit(tiempo_surface, tiempo_rect)
 
     if you_lose_flag:
-        screen.blit(you_lose_surface, you_lose_rect)
+        screen.blit(you_lose_surface, you_lose_rect)  
 
-        if tiempo//1000 == 63 or tiempo//1000 - sprite_groups.defuntion_time//1000 > 3:
+        if tiempo//1000 == 63 or tiempo//1000 - sprite_groups.defuntion_time//1000 ==3:
+            
             running_game = False
             
         
