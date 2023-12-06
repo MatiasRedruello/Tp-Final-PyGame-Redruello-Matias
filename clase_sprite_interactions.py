@@ -40,6 +40,7 @@ class Sprite_interactions():
         self.game_over = False
         self.defuntion_time = 0
         # Create class list
+    
         for item_dict in self.item_porperty:
             item = Item(item_dict.get("inicial_x"),item_dict.get("inicial_y"),item_dict.get("item_path"))
             self.item_list.append(item)
@@ -50,7 +51,7 @@ class Sprite_interactions():
                             plataforma_dict.get("pixel_limit_left"),plataforma_dict.get("lado"),
                             plataforma_dict.get("plataform_path"),plataforma_dict.get("plataform_scale"))
             self.plataform_list.append(plataforma)
-  
+
         for enemy_dict in self.enemy_property:
             enemy = Enemy(enemy_dict.get("rect_speed_x"),enemy_dict.get("rect_speed_y"),
                             enemy_dict.get("inicial_x"),enemy_dict.get("inicial_y"),enemy_dict.get("pixel_limit_rigth"),
@@ -126,6 +127,8 @@ class Sprite_interactions():
                     enemy_hit.lives_remaining -= 1  # Reduce las vidas del enemigo
                     enemy_hit.lives.counter -= 1
                     if enemy_hit.lives_remaining == 0:
+                        
+                        enemy_hit.kill()
                         enemy_hit.alive = False
                         self.player.score += 1000 #optimizar y mostrar por pantalla 
                         # buscar la forma de hacer daño a mele?
@@ -163,6 +166,7 @@ class Sprite_interactions():
                 
             
     def update(self):
+        
         self.add_sprite_to_group()
         self.collide_player_with_plataform()
         self.collide_player_bullet_with_enemy()

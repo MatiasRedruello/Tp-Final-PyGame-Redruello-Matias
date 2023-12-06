@@ -169,7 +169,7 @@ class Enemy(pygame.sprite.Sprite):
         self.lives.rect.bottom = self.rect.top - 10 
     
     def update(self):
-        
+       
         self.define_collision_rects()
         self.move_item_with_enemy()
         self.kill()
