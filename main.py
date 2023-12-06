@@ -8,7 +8,7 @@ pygame.init()
 # Configuración de la ventana
 screen_setup = Screen_settings()# Dejalo ahi porque explota
 screen = pygame.display.set_mode((screen_setup.screen_width, screen_setup.screen_height))
-pygame.display.set_caption('Proyecto Final')
+pygame.display.set_caption('Salto de un Rectángulo')
 
 
 #clock
