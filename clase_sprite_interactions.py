@@ -12,17 +12,19 @@ class Sprite_interactions():
 
         self.screen_width = screen_width
         self.screen_height = screen_height
-
+        self.current_level = "level_one"
         self.delta_ms = None
         self.time= None
+        self.game_time_score = 60
+        self.time_left = 0
         self.letras_precionadas = None
         self.lista_de_eventos = None
         self.letras_precionadas = None
         self.screen = screen 
 
-        self.item_porperty = File.create_property_list("info.json","r","level_one","items")
-        self.plataforma_porperty = File.create_property_list("info.json","r","level_one","plataforma")
-        self.enemy_property = File.create_property_list("info.json","r","level_one","enemigo")
+        self.item_porperty = File.create_property_list("info.json","r",self.current_level,"items")
+        self.plataforma_porperty = File.create_property_list("info.json","r",self.current_level,"plataforma")
+        self.enemy_property = File.create_property_list("info.json","r",self.current_level,"enemigo")
 
         self.item_list = []
         self.plataform_list = []
@@ -84,8 +86,9 @@ class Sprite_interactions():
             self.enemy_group.update()  
         #Portal
         self.portal.do_animation(self.delta_ms)
-        self.portal_group.update()
+        self.portal.update()
         self.portal_group.add(self.portal) 
+        self.portal_group.update()
         #PLayer
         self.player.do_movement(self.letras_precionadas,self.lista_de_eventos,self.time,self.delta_ms)
         self.player.bullets_group.update()
@@ -95,6 +98,7 @@ class Sprite_interactions():
               
 
     def draw(self):
+    
         self.item_group.draw(self.screen)
         self.plataform_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
@@ -179,14 +183,30 @@ class Sprite_interactions():
             if not item.collected:  # Verificar si el ítem no ha sido recogido antes
                 item.collected = True  # Marcar el ítem como recogido
                 self.player.score += 500
+
+    def collide_player_with_portal(self):
+        collision_portal = pygame.sprite.spritecollide(self.player, self.portal_group, False)
+        if collision_portal:
+            if not self.portal.inside_the_portal:
+                self.portal.inside_the_portal = True
                 
+                time_difference =  (self.game_time_score-self.time_left) 
+                print("tiempo total de juego",self.game_time_score)
+                print("tiempo que tarde ne apsar el juego",self.time_left)
+                print("puntos",time_difference)
+                end_score = (self.game_time_score - time_difference)*100
+                self.player.score += end_score
+                print("puntos finales",self.player.score)
+                print("siguiente nivel")
+                           
             
     def update(self):
-        
         self.add_sprite_to_group()
         self.collide_player_with_plataform()
         self.collide_player_bullet_with_enemy()
         self.collide_enemy_bullet_with_player()
         self.collide_player_with_item()
         self.collide_player_with_enemy()
-        
+        self.collide_player_with_portal()
+
+

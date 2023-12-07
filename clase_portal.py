@@ -25,7 +25,10 @@ class Portal(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.actual_img_animation,(100,100))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.inicial_x, self.inicial_y)
-        
+        self.inside_the_portal = False
+        self.time_inside_the_portal = 0
+
+
     def scale_imaage(self):
         self.actual_img_animation = self.actual_animation[self.initial_frame]
         self.image = pygame.transform.scale(self.actual_img_animation,(150,150))
@@ -48,7 +51,8 @@ class Portal(pygame.sprite.Sprite):
                 self.initial_frame = 0
             self.scale_imaage()   
             
-
+    def draw():
+        pass
     def update(self):       
         pass
 

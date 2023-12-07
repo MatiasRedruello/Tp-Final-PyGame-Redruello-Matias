@@ -5,11 +5,11 @@ from clase_proyectil import Bullet
 from clase_auxiliar import Suport
 from clase_items import Item
 class Player(pygame.sprite.Sprite):
-    def __init__(self,screen_width,screen_height,plataform_list) -> None:
+    def __init__(self,screen_width,screen_height,plataform_list,current_level = "level_one") -> None:
         super().__init__()
         # Caracteristicas
         
-        self.archivo_json = File.json_load("info.json","r","level_one")
+        self.archivo_json = File.json_load("info.json","r",current_level)
         self.rect_color = self.archivo_json.get("player").get("rect_color")
         self.rect_speed_x = self.archivo_json.get("player").get("rect_speed_x") # set
         self.rect_speed_y = self.archivo_json.get("player").get("rect_speed_y") # set

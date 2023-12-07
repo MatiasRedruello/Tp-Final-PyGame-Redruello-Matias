@@ -24,11 +24,6 @@ class Item(pygame.sprite.Sprite):
             self.font = pygame.font.Font(None, 15)  # Fuente para el contador
         self.collected = False  # Bandera para saber si el ítem ha sido recogido
 
-    
- 
-
-
-    
 
     def draw(self, screen):
         
@@ -36,7 +31,6 @@ class Item(pygame.sprite.Sprite):
             # Dibuja el contador sobre el corazón si tiene vidas restantes
             text = self.font.render(str(self.counter), True, (255, 255, 255))
             screen.blit(text, (self.rect.centerx, self.rect.centery+40))  # Posición del contador de vidas
-
 
     def update(self):
         # Lógica de actualización si es necesario para el item

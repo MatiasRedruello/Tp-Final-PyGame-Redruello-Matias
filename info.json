@@ -1,5 +1,5 @@
 {
-    "settings":[
+    "level_one":[
         {
             "screen":
             {
@@ -8,12 +8,8 @@
                 "screen_height":800,
                 "fps":60,
                 "name_level":"Level One",
-                "background_level_one":"background/goku_house.png"
-            }
-        }
-    ],
-    "level_one":[
-        {
+                "background_level":"background/goku_house.png"
+            },
             "player":
             {
                 "rect_color" : [0,0,255],
@@ -507,8 +503,16 @@
             }
         }
     ],
-    "nivel_dos":[
-        {
+    "level_two":[
+        {   "screen":
+            {
+                "screen_image":"background/all.png",
+                "screen_width":1000,
+                "screen_height":800,
+                "fps":60,
+                "name_level":"Level One",
+                "background_level":"background/all.png"
+            },
             "personaje":{},
             "proyectil":{},
             "enemigo":{},
@@ -516,8 +520,16 @@
             "plataforma":{}
         }
     ],
-    "nivel_tres":[
-        {
+    "level_three":[
+        {   "screen":
+            {
+                "screen_image":"background/all2.png",
+                "screen_width":1000,
+                "screen_height":800,
+                "fps":60,
+                "name_level":"Level One",
+                "background_level":"background/all2.png"
+            },
             "personaje":{},
             "proyectil":{},
             "enemigo":{},
