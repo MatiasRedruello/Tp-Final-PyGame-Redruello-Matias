@@ -51,7 +51,7 @@ class Enemy(pygame.sprite.Sprite):
         #nemy colllide
         self.feet_size_width = 25 
         self.feet_size_height = 10 
-        self.side_height = 55
+        self.side_height = 50
         self.define_collision_rects()  
               
         self.enemy_image_looking_rigth = True
@@ -141,17 +141,18 @@ class Enemy(pygame.sprite.Sprite):
         # Define las áreas rectangulares
         self.feet_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.bottom - self.feet_size_height, self.feet_size_width, self.feet_size_height)
         self.head_rect = pygame.Rect(self.rect.centerx - self.feet_size_width // 2, self.rect.top - self.feet_size_height, self.feet_size_width, self.feet_size_height)
-        self.left_rect = pygame.Rect(self.rect.left - 0, self.rect.top, self.feet_size_height, self.rect.height)
-        self.right_rect = pygame.Rect(self.rect.right - self.feet_size_height, self.rect.top, self.feet_size_height, self.rect.height)  
+        self.left_rect = pygame.Rect(self.rect.left +25, self.rect.top+30, self.feet_size_height , self.rect.height//2)
+        self.right_rect = pygame.Rect(self.rect.right-25, self.rect.top+30, self.feet_size_height, self.rect.height//2)  
     
     
         # Acciones adicionales antes de eliminar al enemigo, si las hay
     def kill(self):
         if self.lives_remaining == 0:
             self.bullets_group.empty()
-            self.lives.kill()  # Elimina el sprite de las vidas del enemigo del grupo de sprites
+            self.lives.kill()
+            self.alive = False  # Establecer la bandera 'alive' en False cuando el enemigo muere
             super().kill()
-   
+    
             
 
     def do_movement(self,time,delta_ms):

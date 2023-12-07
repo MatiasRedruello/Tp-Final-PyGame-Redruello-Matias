@@ -167,7 +167,12 @@ class Player(pygame.sprite.Sprite):
                 
             self.actual_img_animation = self.actual_animation[self.initial_frame]
             self.image = self.actual_img_animation
-
+    def kill(self):
+        if self.lives_remaining == 0:
+            self.bullets_group.empty()
+            self.lives.kill()
+            self.alive = False  # Establecer la bandera 'alive' en False cuando el enemigo muere
+            super().kill()    
     def create_life_point(self):
         lives = Item(self.rect.x,self.rect.y,self.lives_path,self.lives_remaining)
         return lives
@@ -191,11 +196,12 @@ class Player(pygame.sprite.Sprite):
             self.do_animation(delta_ms)
 
     def update(self):
+        self.kill()
         self.define_collision_rects()
         self.move_item_with_player()
-        print(self.score)
+        
         #para actualizar la pósicion de la vida del jugador
- 
+
 
     def draw(self,screen:pygame.surface.Surface):
         if self.alive:
@@ -205,7 +211,8 @@ class Player(pygame.sprite.Sprite):
                 pygame.draw.rect(screen, (0,255,0), self.head_rect,2)
                 pygame.draw.rect(screen, (255,255,0), self.right_rect,2)
                 pygame.draw.rect(screen, (0,255,255), self.left_rect,2)
-            
+            #mostrar score
+                       
             self.lives.draw(screen)
             screen.blit(self.image,self.rect)
         

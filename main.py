@@ -16,6 +16,7 @@ clock = pygame.time.Clock()
 fps = 60
 font = pygame.font.Font(None, 100)#tipo y tamaño de funete del tiempo
 you_lose_font = pygame.font.Font(None, 50)
+score_font= pygame.font.Font(None, 36)
 #All Sprites and interactions
  
 
@@ -60,22 +61,28 @@ while running_game:
     screen.blit(screen_setup.transform_back_img, screen_setup.transform_back_img.get_rect())  # Color blanco como fondo
     screen.blit(tiempo_surface, tiempo_rect)
 
+
+
     if you_lose_flag:
         screen.blit(you_lose_surface, you_lose_rect)  
-
         if tiempo//1000 == 63 or tiempo//1000 - sprite_groups.defuntion_time//1000 ==3:
-            
             running_game = False
-            
+     
+      # Define la fuente y el tamaño
+# Dibujar el puntaje en la esquina superior izquierda
+    score_text = score_font.render(f"Score: {sprite_groups.player.score}", True, (255, 255, 255))
+    score_rect = score_text.get_rect()
+    score_rect.midtop = (screen_setup.screen_width // 2, tiempo_rect.bottom + 10)  # Alinea el puntaje debajo del tiempo
+    screen.blit(score_text, score_rect)        
         
 
-
-    sprite_groups.delta_ms = delta_ms
-    sprite_groups.time = tiempo
-    sprite_groups.lista_de_eventos = lista_de_eventos
-    sprite_groups.letras_precionadas = letras_precionadas
-    sprite_groups.draw()
-    sprite_groups.update()
+    if sprite_groups.player.alive:
+        sprite_groups.delta_ms = delta_ms
+        sprite_groups.time = tiempo
+        sprite_groups.lista_de_eventos = lista_de_eventos
+        sprite_groups.letras_precionadas = letras_precionadas
+        sprite_groups.draw()
+        sprite_groups.update()
 
 
 

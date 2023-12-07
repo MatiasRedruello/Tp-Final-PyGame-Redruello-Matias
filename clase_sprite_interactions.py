@@ -127,7 +127,6 @@ class Sprite_interactions():
                     enemy_hit.lives_remaining -= 1  # Reduce las vidas del enemigo
                     enemy_hit.lives.counter -= 1
                     if enemy_hit.lives_remaining == 0:
-                        
                         enemy_hit.kill()
                         enemy_hit.alive = False
                         self.player.score += 1000 #optimizar y mostrar por pantalla 
@@ -149,13 +148,30 @@ class Sprite_interactions():
 
     def collide_player_with_enemy(self):
         for enemy in self.enemy_list:
-            if self.player.left_rect.colliderect(enemy.right_rect) or self.player.right_rect.colliderect(enemy.left_rect) :
-                self.player.lives_remaining-=1
-                self.player.lives.counter -= 1
+            if enemy.alive:
+
+                if self.player.left_rect.colliderect(enemy.right_rect):
+                    # Retroceso hacia la izquierda
+                    self.player.rect.x = enemy.rect.right + 100  # Ajusta el valor según tu preferencia
+                    self.player.lives_remaining -= 1  # Reduce las vidas del enemigo
+                    self.player.lives.counter -= 1
+                elif self.player.right_rect.colliderect(enemy.left_rect):
+                    # Retroceso hacia la derecha
+                    self.player.rect.x = enemy.rect.left - 100  # Ajusta el valor según tu preferencia
+                    self.player.lives_remaining -= 1  # Reduce las vidas del enemigo
+                    self.player.lives.counter -= 1
+                #Si me quede sin vidas termina el juego
                 if self.player.lives_remaining == 0:
-                        self.player.alive = False
-                        self.game_over = True
-                        self.defuntion_time = self.time
+                    self.player.alive = False
+                    self.player.kill()
+                    self.game_over = True
+                    self.defuntion_time = self.time
+                # Verificar límites de la pantalla para el jugador
+                if self.player.rect.left < 0:
+                    self.player.rect.left = 0
+                elif self.player.rect.right > self.screen_width:
+                    self.player.rect.right = self.screen_width                        
+
 
     def collide_player_with_item(self):
         collision_items = pygame.sprite.spritecollide(self.player, self.item_group, True) 
