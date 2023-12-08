@@ -12,7 +12,14 @@ class Sprite_interactions():
 
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.current_level = "level_one"
+        self.current_level = "level_one"  
+        self.screen = screen 
+        self.total_score = 0
+        self.level_config()
+       
+
+    def level_config(self):
+        
         self.delta_ms = None
         self.time= None
         self.game_time_score = 60
@@ -20,7 +27,7 @@ class Sprite_interactions():
         self.letras_precionadas = None
         self.lista_de_eventos = None
         self.letras_precionadas = None
-        self.screen = screen 
+        
 
         self.item_porperty = File.create_property_list("info.json","r",self.current_level,"items")
         self.plataforma_porperty = File.create_property_list("info.json","r",self.current_level,"plataforma")
@@ -38,6 +45,7 @@ class Sprite_interactions():
 
         self.portal_group = pygame.sprite.Group()
         self.player = Player(self.screen_width,self.screen_height,self.plataform_list)
+        self.player.score = self.total_score
         self.portal = Portal()
         self.game_over = False
         self.defuntion_time = 0
@@ -61,8 +69,7 @@ class Sprite_interactions():
                             enemy_dict.get("walk_path"),
                             enemy_dict.get("row"),enemy_dict.get("colum"),enemy_dict.get("separate_files"),enemy_dict.get("lives_remaining"),
                             enemy_dict.get("lives_path"),enemy_dict.get("attack_path"),enemy_dict.get("die_path"))
-            self.enemy_list.append(enemy)    
-
+            self.enemy_list.append(enemy)               
     def add_sprite_to_group(self):
         #Item
         for new_item in self.item_list:
@@ -133,9 +140,20 @@ class Sprite_interactions():
                     if enemy_hit.lives_remaining == 0:
                         enemy_hit.kill()
                         enemy_hit.alive = False
-                        self.player.score += 1000 #optimizar y mostrar por pantalla 
-                        # buscar la forma de hacer daño a mele?
-                        # animacion de muerte
+                        self.total_score += 1000
+                        self.player.score = self.total_score 
+                        
+                        # necesario par aeliminar el "fantasma de la bullet"
+                        for enemy_bullet in self.enemy_bullets_group:
+                            enemy_bullet.kill()
+
+
+    def collide_player_bullet_with_plataform(self):
+        for bullet in self.player.bullets_group:
+            collision_plataform = pygame.sprite.spritecollide(bullet, self.plataform_group, True)
+            if collision_plataform:
+                bullet.kill()
+                                    
     def collide_enemy_bullet_with_player(self):
         #probar con recorrer la lista
         for bullet in self.enemy_bullets_group:
@@ -182,22 +200,19 @@ class Sprite_interactions():
         for item in collision_items:
             if not item.collected:  # Verificar si el ítem no ha sido recogido antes
                 item.collected = True  # Marcar el ítem como recogido
-                self.player.score += 500
+                self.total_score += 500
+                self.player.score = self.total_score
 
     def collide_player_with_portal(self):
         collision_portal = pygame.sprite.spritecollide(self.player, self.portal_group, False)
         if collision_portal:
             if not self.portal.inside_the_portal:
                 self.portal.inside_the_portal = True
-                
                 time_difference =  (self.game_time_score-self.time_left) 
-                print("tiempo total de juego",self.game_time_score)
-                print("tiempo que tarde ne apsar el juego",self.time_left)
-                print("puntos",time_difference)
                 end_score = (self.game_time_score - time_difference)*100
-                self.player.score += end_score
-                print("puntos finales",self.player.score)
-                print("siguiente nivel")
+                self.total_score += end_score
+                self.player.score = self.total_score
+                
                            
             
     def update(self):
@@ -208,5 +223,5 @@ class Sprite_interactions():
         self.collide_player_with_item()
         self.collide_player_with_enemy()
         self.collide_player_with_portal()
-
+        self.collide_player_bullet_with_plataform()
 

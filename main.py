@@ -2,35 +2,38 @@ import pygame
 import sys
 from clase_screeen import Screen_settings
 from clase_sprite_interactions import Sprite_interactions
-
+from pygame.locals import *
+from GUI_form_prueba import FormPrueba
 pygame.init()
 
 # Configuración de la ventana
 screen_setup = Screen_settings()# Dejalo ahi porque explota
 screen = pygame.display.set_mode((screen_setup.screen_width, screen_setup.screen_height))
+
 pygame.display.set_caption('Salto de un Rectángulo')
 
 
 #clock
 clock = pygame.time.Clock()
 fps = 60
-font = pygame.font.Font(None, 100)#tipo y tamaño de funete del tiempo
+
+#tipo y tamaño de funete del tiempo
+font = pygame.font.Font(None, 100)
 you_lose_font = pygame.font.Font(None, 50)
 you_win_font = pygame.font.Font(None, 50)
 score_font= pygame.font.Font(None, 36)
 #All Sprites and interactions
- 
-
- 
 sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.screen_height,screen)
+form_prueba = FormPrueba(screen,200,100, 900, 350,"cyan", "yellow", 5, True)
 #Flags
 running_game = True
 you_lose_flag = False
 you_win_game_flag = False
 
+start_time = pygame.time.get_ticks()
 while running_game:
     tiempo_control = 3
-    tiempo = pygame.time.get_ticks()
+    tiempo = pygame.time.get_ticks() - start_time
     letras_precionadas = pygame.key.get_pressed()
     lista_de_eventos = pygame.event.get()
     delta_ms = clock.tick(fps)
@@ -40,21 +43,27 @@ while running_game:
     if sprite_groups.current_level == "level_one" and sprite_groups.portal.inside_the_portal == True:
         sprite_groups.current_level = "level_two"
         screen_setup.current_level = "level_two"
+        
+        sprite_groups.level_config()
+        screen_setup.level_config()
+        start_time = pygame.time.get_ticks()
         sprite_groups.portal.inside_the_portal = False
-        print("se lo paso a sprite groups level dos",sprite_groups.current_level)
-        print("se lo paso a screen setup level dos",screen_setup.current_level)
-        print("valor de inside the portal en el main",sprite_groups.portal.inside_the_portal)
+        
         screen_setup.update()
     elif sprite_groups.current_level == "level_two" and sprite_groups.portal.inside_the_portal == True:
         sprite_groups.current_level = "level_three"
         screen_setup.current_level = "level_three"
+
+        sprite_groups.level_config()
+        screen_setup.level_config()
+        start_time = pygame.time.get_ticks()
         sprite_groups.portal.inside_the_portal = False
         you_win_game_flag = True
-        print("se lo paso a sprite groups level tres",sprite_groups.current_level)
-        print("se lo paso a screen setup level tres",screen_setup.current_level)
-        print("valor de inside the portal en el main",sprite_groups.portal.inside_the_portal)
+
         screen_setup.update()
-        
+
+
+
     # Formas de terminal el juego
     for event in lista_de_eventos:
         if event.type == pygame.QUIT:
@@ -101,12 +110,11 @@ while running_game:
             running_game = False    
      
    
-    # Dibujar el puntaje en la esquina superior izquierda
     score_text = score_font.render(f"Score: {sprite_groups.player.score}", True, (255, 255, 255))
     score_rect = score_text.get_rect()
     score_rect.midtop = (screen_setup.screen_width // 2, tiempo_rect.bottom + 10)  # Alinea el puntaje debajo del tiempo
     screen.blit(score_text, score_rect)        
-        
+
 
     if sprite_groups.player.alive:
         
@@ -116,9 +124,12 @@ while running_game:
         sprite_groups.lista_de_eventos = lista_de_eventos
         sprite_groups.letras_precionadas = letras_precionadas
         sprite_groups.draw()
-        
         sprite_groups.update()
 
+    #gui
+    #
+    screen.fill("Black")
+    form_prueba.update(lista_de_eventos)  
     pygame.display.update()
     
 # Salir de Pygame
