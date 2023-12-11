@@ -4,7 +4,7 @@ from clase_screeen import Screen_settings
 from clase_sprite_interactions import Sprite_interactions
 from GUI_integration import GuiIntegration
 from GUI_pause import BotonPausa
-
+from GUI_controlador_volumen import ControladorVolumen
 pygame.init()
 
 # Configuración de la ventana
@@ -31,7 +31,8 @@ menu = GuiIntegration(screen)
 menu.running_game = False
 you_lose_flag = False
 you_win_game_flag = False
-boton_pausa = BotonPausa(screen)  # Ejemplo de coordenadas y dimensiones
+controlador_volumen = ControladorVolumen("Vengeance (Loopable).wav")
+boton_pausa = BotonPausa(screen, controlador_volumen)  # Ejemplo de coordenadas y dimensiones
 #Necesario para resetear los tiempos por nivel
 
 
@@ -88,9 +89,7 @@ while menu.running_game:
         if event.type == pygame.QUIT:
             menu.running_game = False  
         boton_pausa.clic(event)  # Controlar clics en el botón de pausa
-        if boton_pausa.pressed:
-            boton_pausa.barra_volumen.clic(event)  # Manejar clics en la barra de volumen si la pausa está activada
-            boton_pausa.barra_volumen.draw()
+
             
     if not boton_pausa.pressed:
         if contador == 0 or sprite_groups.game_over:
