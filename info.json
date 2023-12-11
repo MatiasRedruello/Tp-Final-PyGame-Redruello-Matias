@@ -1009,12 +1009,12 @@
     "level_three":[
         {   "screen":
             {
-                "screen_image":"background/all2.png",
+                "screen_image":"background/game_background_4.png",
                 "screen_width":1000,
                 "screen_height":800,
                 "fps":60,
                 "name_level":"Level One",
-                "background_level":"background/all2.png"
+                "background_level":"background/game_background_4.png"
             },
             "player":
             {

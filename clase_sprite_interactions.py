@@ -49,6 +49,7 @@ class Sprite_interactions():
         self.portal = Portal()
         self.game_over = False
         self.defuntion_time = 0
+        self.win_time = 0
         # Create class list
     
         for item_dict in self.item_porperty:
@@ -212,7 +213,7 @@ class Sprite_interactions():
                 end_score = (self.game_time_score - time_difference)*100
                 self.total_score += end_score
                 self.player.score = self.total_score
-                
+                self.win_time = self.time
                            
             
     def update(self):
