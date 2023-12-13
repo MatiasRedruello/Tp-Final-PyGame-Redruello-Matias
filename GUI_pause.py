@@ -16,7 +16,7 @@ class BotonPausa:
         self.color_texto = (255, 255, 255)
         self.color_borde = (255, 255, 255)
         self.barra_x = 400
-        self.barra_y = 20
+        self.barra_y = 15
         self.barra_ancho = 200
         self.barra_alto = 50
         self.text_surface = self.font.render("Pausa", True, self.color_texto)
@@ -52,25 +52,33 @@ class BotonPausa:
     # Solo dibujar la barra si el juego está en pausa
         if self.pressed:
             # Dibujar la barra de volumen
-            barra_color = (0, 0, 100)
+            barra_color = (173, 216, 230)
             barra_rect = pygame.Rect(self.barra_x, self.barra_y, self.barra_ancho, self.barra_alto)
             pygame.draw.rect(self.screen, barra_color, barra_rect)
 
             # Calcular el indicador del volumen actual
             volumen_actual_rect = pygame.Rect(barra_rect.left, barra_rect.top,
                                             barra_rect.width * self.controlador_volumen.volumen, barra_rect.height)
-            volumen_actual_color = (200, 200, 50)  # Color del indicador
+            volumen_actual_color = (255, 255, 153)  # Color del indicador
             pygame.draw.rect(self.screen, volumen_actual_color, volumen_actual_rect)
 
             porcentaje_text = f"{int(self.controlador_volumen.volumen * 100)}%"  # Obtener el porcentaje
+   
+            # Dibujar la palabra "Sound" sobre la barra
             font = pygame.font.Font(None, 24)
-            
+            sound_text = font.render("Sound", True, (255, 255, 255))  # Color blanco
+            sound_rect = sound_text.get_rect()
+            sound_rect.midright = (barra_rect.left + 60, barra_rect.centery)  # Alinear a la derecha de la barra
+            self.screen.blit(sound_text, sound_rect)
+            # Redimensionar el porcentaje al ancho de la barra y la mitad de la altura de la barra
             porcentaje_surface = font.render(porcentaje_text, True, (255, 255, 255))  # Color blanco
+            porcentaje_surface = pygame.transform.scale(porcentaje_surface, (25, 25))
             porcentaje_rect = porcentaje_surface.get_rect()
-            porcentaje_rect.topleft = (barra_rect.right + 10, barra_rect.top)  # Cambia las coordenadas según tu diseño
+            porcentaje_rect.midright = (sound_rect.right + 100, barra_rect.centery)  # Alinear a la izquierda de "Sound"
+            self.screen.blit(porcentaje_surface, porcentaje_rect)
 
             # Rellenar el área del porcentaje con el color del fondo
-            fondo_color = (0, 0, 0)  # Cambia este color según tu diseño de fondo
+            fondo_color = (173, 216, 230)  # Cambia este color según tu diseño de fondo
             self.screen.fill(fondo_color, porcentaje_rect)
 
             # Dibujar el nuevo porcentaje

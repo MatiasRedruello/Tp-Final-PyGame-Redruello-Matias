@@ -47,8 +47,9 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
-                                
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
+                            
                 },
                 "2":
                 {
@@ -67,7 +68,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
                     
 
                                 
@@ -89,7 +91,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
 
                                 
                 },
@@ -110,7 +113,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
 
                                 
                 },"5":
@@ -128,7 +132,8 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
                                 
                 }
             },
@@ -499,6 +504,10 @@
                     "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]                 
                 }
+
+            },
+            "traps":
+            {
 
             }
         }
@@ -537,12 +546,12 @@
             {
                 "1":
                 {
-                    "rect_speed_x" : 3,
+                    "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 740,
-                    "pixel_limit_rigth" : 50,
-                    "pixel_limit_left" : 250,
+                    "inicial_x" : 900, 
+                    "inicial_y" : 550,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
                     "pixel_limit_y" : 0,
                     "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
                     "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
@@ -550,80 +559,41 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
-                                
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
+                            
                 },
                 "2":
                 {
                     "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 330,
-                    "pixel_limit_rigth" : 150,
-                    "pixel_limit_left" : 450,
+                    "inicial_x" : 150, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 650,
+                    "pixel_limit_left" : 150,
                     "pixel_limit_y" : 0,
                     "bullet_path":"",
-                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
+                    "walk_path":"Enemy/Orc mid/Walk/Walk_{0}.png",
                     "row":0,
                     "colum":0,
                     "separate_files":"yes",
-                    "lives_remaining":3,
+                    "lives_remaining":5,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
-                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "attack_path":"Enemy/Orc mid/Attack/Attack_0.png",
+                    "die_path":"Enemy/Orc mid/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
                     
 
                                 
                 },
-                "3":
+                "5":
                 {
-                    "rect_speed_x" : 2,
+                    "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 50, 
-                    "inicial_y" : 330,
-                    "pixel_limit_rigth" : 550,
-                    "pixel_limit_left" : 50,
-                    "pixel_limit_y" : 0,
-                    "bullet_path":"",
-                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
-                    "row":0,
-                    "colum":0,
-                    "separate_files":"yes",
-                    "lives_remaining":3,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
-                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
-
-                                
-                },
-                "4":
-                {
-                    "rect_speed_x" : 2,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 600, 
-                    "inicial_y" : 80,
-                    "pixel_limit_rigth" : 200,
-                    "pixel_limit_left" : 470,
-                    "pixel_limit_y" : 0,
-                    "bullet_path":"",
-                    "walk_path":"Enemy/Orc easy/Walk/Walk_{0}.png",
-                    "row":0,
-                    "colum":0,
-                    "separate_files":"yes",
-                    "lives_remaining":3,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
-                    "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
-
-                                
-                },"5":
-                {
-                    "rect_speed_x" : 3,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 550,
-                    "pixel_limit_rigth" : 50,
-                    "pixel_limit_left" : 250,
+                    "inicial_x" : 900, 
+                    "inicial_y" : 150,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
                     "pixel_limit_y" : 0,
                     "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
                     "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
@@ -631,7 +601,8 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
                                 
                 }
             },
@@ -639,20 +610,20 @@
             {
                 "1":
                 {
-                    "inicial_x" :910 , 
-                    "inicial_y" :350,
+                    "inicial_x" :0 , 
+                    "inicial_y" :500,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"           
                 },
                 "2":
                 {
-                    "inicial_x" :810 , 
-                    "inicial_y" :100 ,
+                    "inicial_x" :900 , 
+                    "inicial_y" :150 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"              
                 },
                 "3":
                 {
-                    "inicial_x" :10, 
-                    "inicial_y" :450 ,
+                    "inicial_x" :900, 
+                    "inicial_y" :550 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
                 }
             },
@@ -670,8 +641,8 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 950, 
-                    "inicial_y" : 700,
+                    "inicial_x" : 100, 
+                    "inicial_y" : 750,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -682,8 +653,8 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 800, 
-                    "inicial_y" : 600,
+                    "inicial_x" : 0, 
+                    "inicial_y" : 550,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -692,21 +663,21 @@
                 },
                 "2":
                 {
-                    "rect_speed_x" : 0,
+                    "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 750, 
+                    "inicial_x" : 50, 
                     "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_rigth" : 550,
+                    "pixel_limit_left" : 100,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]               
+                    "plataform_scale": [70,50]               
                 },
                 "3":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 700, 
+                    "inicial_x" : 450, 
                     "inicial_y" : 600,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
@@ -716,89 +687,30 @@
                 },
                 "4":
                 {
-                    "rect_speed_x" : 0,
+                    "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 650, 
+                    "inicial_x" : 550, 
                     "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_rigth" : 100,
+                    "pixel_limit_left" : 550,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]               
+                    "plataform_scale": [70,50]               
                 },
                 "5":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 600, 
-                    "inicial_y" : 600,
+                    "inicial_x" : 900, 
+                    "inicial_y" : 550,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]               
+                    "plataform_scale": [100,50]               
                 },
-                "6":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 550, 
-                    "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                 
-                },
-                "7":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                 
-                },
+                
                 "8":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 400, 
-                    "inicial_y" : 600,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                
-                },
-                "9":
-                {
-                    "rect_speed_x" : 2,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 50, 
-                    "inicial_y" : 600,
-                    "pixel_limit_rigth" : 650,
-                    "pixel_limit_left" : 50,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                
-                },
-                "10":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 0, 
-                    "inicial_y" : 500,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                
-                },
-                "11":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
@@ -810,23 +722,23 @@
                     "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]                
                 },
-                "12":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 150, 
-                    "inicial_y" : 400,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                
-                },
-                "13":
+                "9":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
                     "inicial_x" : 200, 
+                    "inicial_y" : 400,
+                    "pixel_limit_rigth" : 650,
+                    "pixel_limit_left" : 150,
+                    "lado" : "True",
+                    "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [50,50]                
+                },
+                "10":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 300, 
                     "inicial_y" : 400,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
@@ -836,34 +748,34 @@
                 },
                 "14":
                 {
-                    "rect_speed_x" : 0,
+                    "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 250, 
+                    "inicial_x" : 700, 
                     "inicial_y" : 400,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_rigth" : 200,
+                    "pixel_limit_left" : 350,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [150,50]                
+                    "plataform_scale": [50,50]                
                 },
                 "15":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
+                    "inicial_x" : 800, 
                     "inicial_y" : 400,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [150,50]                
+                    "plataform_scale": [200,50]                
                 },
                 "16":
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 650, 
-                    "inicial_y" : 400,
+                    "inicial_x" : 750, 
+                    "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -875,7 +787,7 @@
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
                     "inicial_x" : 700, 
-                    "inicial_y" : 400,
+                    "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -886,8 +798,8 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 750, 
-                    "inicial_y" : 400,
+                    "inicial_x" : 650, 
+                    "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -898,8 +810,8 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 900, 
-                    "inicial_y" : 400,
+                    "inicial_x" : 550, 
+                    "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -910,8 +822,8 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 425, 
-                    "inicial_y" : 300,
+                    "inicial_x" : 450, 
+                    "inicial_y" : 250,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
@@ -922,38 +834,15 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 150,
+                    "inicial_x" : 400, 
+                    "inicial_y" : 200,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
                     "plataform_scale": [50,50]                 
                 },
-                "22":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 550, 
-                    "inicial_y" : 150,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [150,50]                 
-                },
-                "23":
-                {
-                    "rect_speed_x" : 0,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 700, 
-                    "inicial_y" : 150,
-                    "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
-                    "lado" : "True",
-                    "plataform_path": "Plataform/Crate.png",
-                    "plataform_scale": [50,50]                 
-                },
+                
                 "24":
                 {
                     "rect_speed_x" : 0,
@@ -994,13 +883,221 @@
                 {
                     "rect_speed_x" : 0,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 800, 
+                    "inicial_x" : 900, 
                     "inicial_y" : 150,
                     "pixel_limit_rigth" : 0,
                     "pixel_limit_left" : 0,
                     "lado" : "True",
                     "plataform_path": "Plataform/Crate.png",
+                    "plataform_scale": [100,50]                 
+                }
+
+            },
+            "traps":
+            {
+                "0":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 150, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,50]         
+                },
+                "1":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 200, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]         
+                },
+                "2":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 250, 
+                    "inicial_y" : 720,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,100]               
+                },
+                "3":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 300, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,50]               
+                },
+                "4":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 350, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]               
+                },
+                "5":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 400, 
+                    "inicial_y" : 720,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,100]               
+                },
+                "6":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 450, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
                     "plataform_scale": [50,50]                 
+                },
+                "7":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 500, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]                 
+                },
+                "8":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 550, 
+                    "inicial_y" : 720,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,100]                
+                },
+                "9":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 600, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,50]                
+                },
+                "10":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 650, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]                
+                },
+                "11":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 700, 
+                    "inicial_y" : 720,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,100]                
+                },
+                "12":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 750, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,50]                
+                },
+                "13":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 800, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]                
+                },
+                "14":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 850, 
+                    "inicial_y" : 720,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,100]                
+                },
+                "15":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 900, 
+                    "inicial_y" : 760,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,50]                
+                },
+                "16":
+                {
+                    "rect_speed_x" : 0,
+                    "rect_speed_y" : 0,
+                    "inicial_x" : 950, 
+                    "inicial_y" : 670,
+                    "pixel_limit_rigth" : 0,
+                    "pixel_limit_left" : 0,
+                    "lado" : "True",
+                    "plataform_path": "Traps/rock_metal_2__x1_iconic_png_1354832672.png",
+                    "plataform_scale": [50,150]                
                 }
 
             }
@@ -1053,8 +1150,9 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
-                                
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
+                            
                 },
                 "2":
                 {
@@ -1073,7 +1171,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
                     
 
                                 
@@ -1095,7 +1194,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
 
                                 
                 },
@@ -1116,7 +1216,8 @@
                     "lives_remaining":3,
                     "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
                     "attack_path":"Enemy/Orc easy/Attack/Attack_{0}.png",
-                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png"
+                    "die_path":"Enemy/Orc easy/Dead/Dead_{0}.png",
+                    "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
 
                                 
                 },"5":
@@ -1134,7 +1235,8 @@
                     "colum":6,
                     "separate_files":"no",
                     "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png"
+                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
+                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
                                 
                 }
             },
@@ -1506,6 +1608,10 @@
                     "plataform_scale": [50,50]                 
                 }
 
+            },
+            "traps":
+            {
+                
             }
         }
     ]

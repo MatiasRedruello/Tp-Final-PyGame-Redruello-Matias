@@ -16,7 +16,7 @@ class Enemy(pygame.sprite.Sprite):
                 colum,
                 separate_files,
                 lives_remaining,
-                lives_path,attack_path,die_path) -> None:
+                lives_path,attack_path,die_path,sound_enemy_damege) -> None:
         super().__init__()
         # Caracteristicas
         self.rect_speed_x = rect_speed_x # set
@@ -68,7 +68,8 @@ class Enemy(pygame.sprite.Sprite):
         self.time_control = Suport.random_shooting_time()
         self.alive = True #controla que el enemigo este vivo
         self.mele_attack = False #controla ataque  mele
-
+        #sonidos
+        self.sound_damege = pygame.mixer.Sound(sound_enemy_damege)
      #ubico al enemigo en eje y
         
     def do_walk(self):

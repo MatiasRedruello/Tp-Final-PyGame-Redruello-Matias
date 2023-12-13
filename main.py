@@ -18,7 +18,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 #tipo y tamaño de funete del tiempo
-font = pygame.font.Font(None, 100)
+font_time = pygame.font.Font(None, 100)
 you_lose_font = pygame.font.Font(None, 100)
 you_win_font = pygame.font.Font(None, 100)
 score_font= pygame.font.Font(None, 36)
@@ -31,15 +31,16 @@ menu = GuiIntegration(screen)
 menu.running_game = False
 you_lose_flag = False
 you_win_game_flag = False
-controlador_volumen = ControladorVolumen("Vengeance (Loopable).wav")
+controlador_volumen = ControladorVolumen("Sound/Vengeance (Loopable).wav")
 boton_pausa = BotonPausa(screen, controlador_volumen)  # Ejemplo de coordenadas y dimensiones
 #Necesario para resetear los tiempos por nivel
 
-
 #menu 1 y2
 sprite_groups.current_level = menu.menu()
+
 if menu.running_game:
     start_time = pygame.time.get_ticks()
+
 while menu.running_game:
     
     tiempo_control = 3
@@ -66,8 +67,8 @@ while menu.running_game:
         start_time = pygame.time.get_ticks()# Necesario par areiniciar el contador
         sprite_groups.portal.inside_the_portal = False
         menu.level_selection.force_level = False
-        
         screen_setup.update()
+
     elif (sprite_groups.current_level == "level_two"  and sprite_groups.portal.inside_the_portal == True) or \
         (sprite_groups.current_level == "level_two" and menu.level_selection.force_level):
 
@@ -79,7 +80,8 @@ while menu.running_game:
         start_time = pygame.time.get_ticks()# Necesario par areiniciar el contador
         sprite_groups.portal.inside_the_portal = False
         screen_setup.update()
-    #gane
+
+        #gane
     elif  (sprite_groups.current_level == "level_three"  and sprite_groups.portal.inside_the_portal == True):
             you_win_game_flag = True
             
@@ -111,7 +113,7 @@ while menu.running_game:
 
         #Mostrar contador por pantalla
         # Renderizar tiempo restante
-        tiempo_surface = font.render(f"{contador}", True, (255, 255, 0))  # Color blanco
+        tiempo_surface = font_time.render(f"{contador}", True, (255, 255, 0))  # Color blanco
         # Obtener rectángulo del texto renderizado
         tiempo_rect = tiempo_surface.get_rect()
         # Centrar el texto en la parte superior de la pantalla

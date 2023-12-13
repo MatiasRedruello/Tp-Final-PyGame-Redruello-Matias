@@ -32,13 +32,16 @@ class Sprite_interactions():
         self.item_porperty = File.create_property_list("info.json","r",self.current_level,"items")
         self.plataforma_porperty = File.create_property_list("info.json","r",self.current_level,"plataforma")
         self.enemy_property = File.create_property_list("info.json","r",self.current_level,"enemigo")
+        self.traps_propery = File.create_property_list("info.json","r",self.current_level,"traps")
 
         self.item_list = []
         self.plataform_list = []
         self.enemy_list = []
+        self.traps_list = []
 
         self.item_group = pygame.sprite.Group()
         self.plataform_group = pygame.sprite.Group()
+        self.traps_group = pygame.sprite.Group()
         self.enemy_group = pygame.sprite.Group()
         self.enemy_bullets_group = pygame.sprite.Group()
         self.player_group = pygame.sprite.Group()
@@ -63,13 +66,22 @@ class Sprite_interactions():
                             plataforma_dict.get("plataform_path"),plataforma_dict.get("plataform_scale"))
             self.plataform_list.append(plataforma)
 
+        #Usa la misma clase que las plataformas
+        for traps_list in self.traps_propery:
+            trap = Plataforma(traps_list.get("rect_speed_x"),traps_list.get("rect_speed_y"),
+                            traps_list.get("inicial_x"),traps_list.get("inicial_y"),traps_list.get("pixel_limit_rigth"),
+                            traps_list.get("pixel_limit_left"),traps_list.get("lado"),
+                            traps_list.get("plataform_path"),traps_list.get("plataform_scale"))
+            self.traps_list.append(trap)
+
+
         for enemy_dict in self.enemy_property:
             enemy = Enemy(enemy_dict.get("rect_speed_x"),enemy_dict.get("rect_speed_y"),
                             enemy_dict.get("inicial_x"),enemy_dict.get("inicial_y"),enemy_dict.get("pixel_limit_rigth"),
                             enemy_dict.get("pixel_limit_left"),enemy_dict.get("pixel_limit_y"),enemy_dict.get("bullet_path"),
                             enemy_dict.get("walk_path"),
                             enemy_dict.get("row"),enemy_dict.get("colum"),enemy_dict.get("separate_files"),enemy_dict.get("lives_remaining"),
-                            enemy_dict.get("lives_path"),enemy_dict.get("attack_path"),enemy_dict.get("die_path"))
+                            enemy_dict.get("lives_path"),enemy_dict.get("attack_path"),enemy_dict.get("die_path"),enemy_dict.get("sound_enemy_damege"))
             self.enemy_list.append(enemy)               
     def add_sprite_to_group(self):
         #Item
@@ -82,6 +94,13 @@ class Sprite_interactions():
             new_plataform.do_movement()
             new_plataform.draw(self.screen)
             self.plataform_group.update() 
+        #Traps
+        for new_traps in self.traps_list:
+            self.traps_group.add(new_traps)
+            new_traps.do_movement()
+            new_traps.draw(self.screen)
+            self.traps_group.update()
+
         #Enemy
         for new_enemy in self.enemy_list:
             self.enemy_group.add(new_enemy)
@@ -109,6 +128,7 @@ class Sprite_interactions():
     
         self.item_group.draw(self.screen)
         self.plataform_group.draw(self.screen)
+        self.traps_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
         self.player.bullets_group.draw(self.screen)
         self.player.draw(self.screen)
@@ -136,6 +156,7 @@ class Sprite_interactions():
             if collision_enemies:
                 bullet.kill()
                 for enemy_hit in collision_enemies:
+                    enemy_hit.sound_damege.play()
                     enemy_hit.lives_remaining -= 1  # Reduce las vidas del enemigo
                     enemy_hit.lives.counter -= 1
                     if enemy_hit.lives_remaining == 0:
@@ -162,6 +183,7 @@ class Sprite_interactions():
             if collision_player:
                 bullet.kill()
                 for player_hit in collision_player:
+                    self.player.sound_damege.play()
                     player_hit.lives_remaining -= 1  # Reduce las vidas del enemigo
                     player_hit.lives.counter -= 1
                     if player_hit.lives_remaining == 0:
@@ -175,12 +197,14 @@ class Sprite_interactions():
 
                 if self.player.left_rect.colliderect(enemy.right_rect):
                     # Retroceso hacia la izquierda
-                    self.player.rect.x = enemy.rect.right + 100  # Ajusta el valor según tu preferencia
+                    self.player.rect.x = enemy.rect.right + 100
+                    self.player.sound_damege.play()  # Ajusta el valor según tu preferencia
                     self.player.lives_remaining -= 1  # Reduce las vidas del enemigo
                     self.player.lives.counter -= 1
                 elif self.player.right_rect.colliderect(enemy.left_rect):
                     # Retroceso hacia la derecha
-                    self.player.rect.x = enemy.rect.left - 100  # Ajusta el valor según tu preferencia
+                    self.player.rect.x = enemy.rect.left - 100 
+                    self.player.sound_damege.play() # Ajusta el valor según tu preferencia
                     self.player.lives_remaining -= 1  # Reduce las vidas del enemigo
                     self.player.lives.counter -= 1
                 #Si me quede sin vidas termina el juego

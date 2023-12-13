@@ -60,8 +60,10 @@ class Player(pygame.sprite.Sprite):
         self.define_collision_rects()
         self.lives = self.create_life_point()
         self.alive = True
-
-
+        #sonidos
+        self.sound_laser = pygame.mixer.Sound("Sound/laser5.ogg")
+        self.sound_damege = pygame.mixer.Sound("Sound/414071__inspectorj__dialogue-pained-yelp-loud-c.wav")
+        
         
     def jump_settings(self):
         self.rect_speed_y += self.gravity
@@ -130,16 +132,18 @@ class Player(pygame.sprite.Sprite):
         for event in lista_de_eventos:   
             if tiempo_actual-self.ultimo_disparo > self.timepo_control:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_d and not event.key == pygame.K_a and  self.player_image_looking_rigth:
+                    self.sound_laser.play()
                     nuevo_proyectil = Bullet(self.rect.x,self.rect.y,
                                                 self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
                                                 self.proyectil.get("bullet_scale"),
                                                 self.proyectil.get("bullet_speed"),60,delta_ms,True)
                     self.bullets_group.add(nuevo_proyectil)
                     self.ultimo_disparo = tiempo_actual
-
+                
             if tiempo_actual-self.ultimo_disparo > self.timepo_control:        
                 # Detecta si se preciono la tecla de disparo a la izquierda  
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_a and not event.key == pygame.K_d and not self.player_image_looking_rigth:
+                    self.sound_laser.play()
                     nuevo_proyectil = Bullet(self.rect.x,self.rect.y,
                                                 self.rect.width,self.rect.height,self.proyectil.get("bullet_path"),
                                                 self.proyectil.get("bullet_scale"),
@@ -147,7 +151,7 @@ class Player(pygame.sprite.Sprite):
                     nuevo_proyectil.delta_ms = delta_ms
                     self.bullets_group.add(nuevo_proyectil)          
                     self.ultimo_disparo = tiempo_actual
-
+                
     def do_animation(self,delta_ms):
         """
         self: Por defecto
