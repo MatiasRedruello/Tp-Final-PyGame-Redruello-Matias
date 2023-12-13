@@ -16,7 +16,7 @@ class Sprite_interactions():
         self.screen = screen 
         self.total_score = 0
         self.level_config()
-       
+        self.ultima_colision = 0
 
     def level_config(self):
         
@@ -149,7 +149,27 @@ class Sprite_interactions():
                 self.player.rect.left = plataforma.right_rect.right
             if self.player.right_rect.colliderect(plataforma.left_rect):
                 self.player.rect.right = plataforma.left_rect.left
-    
+
+    def collide_player_with_trap(self):
+        for trap in self.traps_list:
+            if self.player.feet_rect.colliderect(trap.ground_rect): 
+                if self.time-self.ultima_colision > self.player.timepo_control:
+                    self.player.sound_damege.play()
+                    self.player.lives_remaining -= 1  # Reduce las vidas del enemigo
+                    self.player.lives.counter -= 1
+                    self.ultima_colision = self.time
+                    if self.player.lives_remaining <= 0:
+                        self.player.alive = False
+                        self.game_over = True
+                        self.defuntion_time = self.time  
+            # if self.player.left_rect.colliderect(trap.right_rect):
+            #     """Si el lado izquierdo del jugador colisiona con el lado derecho de una trap, 
+            #     el jugador se coloca justo al lado derecho de esa trap."""
+            #     self.player.rect.left = trap.right_rect.right
+            # if self.player.right_rect.colliderect(trap.left_rect):
+            #     self.player.rect.right = trap.left_rect.left            
+
+
     def collide_player_bullet_with_enemy(self):
         for bullet in self.player.bullets_group:
             collision_enemies = pygame.sprite.spritecollide(bullet, self.enemy_group, True)
@@ -249,4 +269,4 @@ class Sprite_interactions():
         self.collide_player_with_enemy()
         self.collide_player_with_portal()
         self.collide_player_bullet_with_plataform()
-
+        self.collide_player_with_trap()

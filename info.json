@@ -546,12 +546,12 @@
             {
                 "1":
                 {
-                    "rect_speed_x" : 0,
+                    "rect_speed_x" : 1,
                     "rect_speed_y" : 0,
                     "inicial_x" : 900, 
-                    "inicial_y" : 550,
+                    "inicial_y" : 490,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_left" : 900,
                     "pixel_limit_y" : 0,
                     "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
                     "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
@@ -568,9 +568,9 @@
                     "rect_speed_x" : 2,
                     "rect_speed_y" : 0,
                     "inicial_x" : 150, 
-                    "inicial_y" : 150,
-                    "pixel_limit_rigth" : 650,
-                    "pixel_limit_left" : 150,
+                    "inicial_y" : 80,
+                    "pixel_limit_rigth" : 600,
+                    "pixel_limit_left" : 100,
                     "pixel_limit_y" : 0,
                     "bullet_path":"",
                     "walk_path":"Enemy/Orc mid/Walk/Walk_{0}.png",
@@ -586,14 +586,14 @@
 
                                 
                 },
-                "5":
+                "3":
                 {
-                    "rect_speed_x" : 0,
+                    "rect_speed_x" : 1,
                     "rect_speed_y" : 0,
-                    "inicial_x" : 900, 
-                    "inicial_y" : 150,
+                    "inicial_x" : 930, 
+                    "inicial_y" : 90,
                     "pixel_limit_rigth" : 0,
-                    "pixel_limit_left" : 0,
+                    "pixel_limit_left" : 900,
                     "pixel_limit_y" : 0,
                     "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
                     "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
@@ -610,20 +610,32 @@
             {
                 "1":
                 {
-                    "inicial_x" :0 , 
+                    "inicial_x" :10 , 
                     "inicial_y" :500,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"           
                 },
                 "2":
                 {
-                    "inicial_x" :900 , 
-                    "inicial_y" :150 ,
+                    "inicial_x" :940 , 
+                    "inicial_y" :120 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"              
                 },
                 "3":
                 {
-                    "inicial_x" :900, 
-                    "inicial_y" :550 ,
+                    "inicial_x" :940, 
+                    "inicial_y" :530 ,
+                    "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
+                },
+                "4":
+                {
+                    "inicial_x" :550, 
+                    "inicial_y" :350 ,
+                    "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
+                },
+                "5":
+                {
+                    "inicial_x" :650, 
+                    "inicial_y" :350 ,
                     "item_path":"Item/bean_garden__x1_iconic_png_1354836553.png"               
                 }
             },
