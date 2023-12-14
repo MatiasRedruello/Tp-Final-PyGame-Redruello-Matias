@@ -117,24 +117,6 @@
                     "sound_enemy_damege":"Sound/559621__leadstarson__monster_sound_medium_death.wav"
 
                                 
-                },"5":
-                {
-                    "rect_speed_x" : 3,
-                    "rect_speed_y" : 0,
-                    "inicial_x" : 500, 
-                    "inicial_y" : 550,
-                    "pixel_limit_rigth" : 50,
-                    "pixel_limit_left" : 250,
-                    "pixel_limit_y" : 0,
-                    "bullet_path":"Enemy/Crab/Power/blue_bubble__x1_iconic_png_1354829722.png",
-                    "walk_path":"Enemy/Crab/Walk/npc_crab__x1_walk_png_1354831183.png",
-                    "row":4,
-                    "colum":6,
-                    "separate_files":"no",
-                    "lives_remaining":2,
-                    "lives_path":"Lifes/hi_overlay_variant_hearts_x1_1_png_1354840444.png",
-                    "sound_enemy_damege":"Sound/614315__scorpion67890__gnasher-death.ogg"
-                                
                 }
             },
             "items":
