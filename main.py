@@ -1,11 +1,13 @@
 import pygame
 import sys
+
 from clase_auxiliar import Suport
 from clase_screeen import Screen_settings
 from clase_sprite_interactions import Sprite_interactions
 from GUI_integration import GuiIntegration
 from GUI_pause import BotonPausa
 from GUI_controlador_volumen import ControladorVolumen
+
 pygame.init()
 
 # Configuración de la ventana
@@ -35,7 +37,7 @@ menu.running_game = False
 you_lose_flag = False
 you_win_game_flag = False
 controlador_volumen = ControladorVolumen("Sound/Vengeance (Loopable).wav")
-boton_pausa = BotonPausa(screen, controlador_volumen)  # Ejemplo de coordenadas y dimensiones
+  # Ejemplo de coordenadas y dimensiones
 #Necesario para resetear los tiempos por nivel
 
 #menu 1 y2
@@ -46,6 +48,10 @@ if menu.running_game:
 if not tabla_posiciones.existe_table:
     tabla_posiciones.crear_base_datos_sql()
     tabla_posiciones.existe_table = True
+
+lista_puntajes = tabla_posiciones.obtener_tabla_ordenada(tabla_posiciones.nombre_archivo_sql)
+boton_pausa = BotonPausa(screen, controlador_volumen,screen_setup.screen_width,lista_puntajes)
+boton_pausa.update()
 while menu.running_game:
     
     tiempo_control = 3
@@ -165,6 +171,9 @@ while menu.running_game:
             sprite_groups.draw()
             sprite_groups.update()
     boton_pausa.draw()
+
+
+    
     pygame.display.update()
     
 # Salir de Pygame

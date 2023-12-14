@@ -1,13 +1,13 @@
 import pygame
-
+from GUI_puntajes import TablaPuntajes
 
 
 class BotonPausa:
-    def __init__(self, screen,controlador_volumen):
+    def __init__(self, screen,controlador_volumen,screen_width,lista_puntajes):
         self.screen = screen
         self.width = 100
         self.height = 50
-
+        self.screen_width = screen_width
         self.font = pygame.font.SysFont("Arial", 24)
 
         self.pressed = False
@@ -25,7 +25,8 @@ class BotonPausa:
         
         self.pausa = False
         self.controlador_volumen = controlador_volumen  # Añadir el controlador de volumen
-        
+        self.lista_puntajes = lista_puntajes
+        self.tabla_puntajes = TablaPuntajes(self.screen_width,lista_puntajes)
 
 
     def aumentar_volumen(self):
@@ -107,6 +108,7 @@ class BotonPausa:
         if self.pressed:
             color_actual = self.color_presionado
             self.draw_volume_bar()
+            self.tabla_puntajes.draw(self.screen)
         else:
             color_actual = self.color_normal
         
@@ -115,4 +117,4 @@ class BotonPausa:
         self.screen.blit(self.text_surface, self.text_rect)
 
     def update(self):
-        pass
+        self.tabla_puntajes.update()

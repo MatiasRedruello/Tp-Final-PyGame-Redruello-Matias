@@ -114,6 +114,5 @@ class Suport():
         if self.existe_table and self.ingrese_nombre :
             self.insertar_tabla_sql(self.nombre_archivo_sql,name,score)
             self.ingrese_nombre = False
-            resultado = self.obtener_tabla_ordenada(self.nombre_archivo_sql)
-            return resultado
+            
           
