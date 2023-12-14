@@ -1,5 +1,6 @@
 import pygame
 import sys
+from clase_auxiliar import Suport
 from clase_screeen import Screen_settings
 from clase_sprite_interactions import Sprite_interactions
 from GUI_integration import GuiIntegration
@@ -11,6 +12,7 @@ pygame.init()
 screen_setup = Screen_settings()# Dejalo ahi porque explota
 screen = pygame.display.set_mode((screen_setup.screen_width, screen_setup.screen_height))
 pygame.display.set_caption("Warrior Path: Race to the Portal")
+
 
 
 #clock
@@ -26,6 +28,7 @@ score_font= pygame.font.Font(None, 36)
 #All Sprites and interactions
 sprite_groups = Sprite_interactions(screen_setup.screen_width,screen_setup.screen_height,screen)
 menu = GuiIntegration(screen)
+tabla_posiciones = Suport()
 #Flags
 
 menu.running_game = False
@@ -40,7 +43,9 @@ sprite_groups.current_level = menu.menu()
 
 if menu.running_game:
     start_time = pygame.time.get_ticks()
-
+if not tabla_posiciones.existe_table:
+    tabla_posiciones.crear_base_datos_sql()
+    tabla_posiciones.existe_table = True
 while menu.running_game:
     
     tiempo_control = 3
@@ -94,7 +99,7 @@ while menu.running_game:
 
             
     if not boton_pausa.pressed:
-        if contador == 0 or sprite_groups.game_over:
+        if contador == 0 or sprite_groups.game_over:          
             you_lose_flag = True
             # Renderizar mensaje 
             you_lose_surface = you_lose_font.render(f"GAME OVER", True, (255, 0, 0))  # Color blanco
@@ -123,15 +128,25 @@ while menu.running_game:
         # Draw background
         screen.blit(screen_setup.transform_back_img, screen_setup.transform_back_img.get_rect())  # Color blanco como fondo
         screen.blit(tiempo_surface, tiempo_rect)
-        # Contador interno para evitar que termine el juego directamnte si perdes
-        if you_lose_flag:
+        # Contador interno para evitar que termine el juego directamnte si perdes e ingresa el nombre del perdedor
+        if you_lose_flag:                        
             screen.blit(you_lose_surface, you_lose_rect)  
             if tiempo//1000 == 63 or tiempo//1000 - sprite_groups.defuntion_time//1000 ==3:
+                if tabla_posiciones.existe_table and tabla_posiciones.ingrese_nombre :
+                    name = input("Ingrese su nombre")
+                    score = sprite_groups.total_score                
+                    tabla = tabla_posiciones.mostrar_base_de_datos(name,score)
+                tabla_posiciones.ingrese_nombre  = False                
                 menu.running_game = False
-        # Contador interno para evitar que termine el juego directamnte si ganas
+        # Contador interno para evitar que termine el juego directamnte si ganas e ingresa el nombre del ganador
         if you_win_game_flag:
             screen.blit(you_win_surface, you_win_rect)  
             if tiempo//1000 - sprite_groups.win_time//1000 ==3:
+                if tabla_posiciones.existe_table and tabla_posiciones.ingrese_nombre :
+                    name = input("Ingrese su nombre")
+                    score = sprite_groups.total_score                
+                    tabla = tabla_posiciones.mostrar_base_de_datos(name,score)
+                tabla_posiciones.ingrese_nombre  = False                  
                 menu.running_game = False    
         
         #score
